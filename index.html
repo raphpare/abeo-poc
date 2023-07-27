@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>POC: squelette page ABEO</title>
+		<meta name="description" content="Squelette d'une page de l'application ABEO">
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -418,7 +419,6 @@
 
 			@media (max-width: 767px) {
 				.abo-smart-app-root__copyright {
-					-ms-flex-item-align: end;
 					align-self: flex-end;
 				}
 			}
@@ -476,11 +476,7 @@
 			.abo-smart-entete-app__contenu-gauche {
 				display: flex;
 				align-items: center;
-				-webkit-box-pack: start;
-    			-ms-flex-pack: start;
 				justify-content: flex-start;
-				-webkit-box-flex: 1;
-				-ms-flex: auto;
 				flex: auto;
 			}
 
@@ -498,7 +494,6 @@
 			}
 
 			.abo-smart-entete-app__logos svg {
-				width: 100%;
 				max-height: 32px;
 			}
 
@@ -850,8 +845,6 @@
 			}
 
 			.abo-gabarit-page__contenu-gauche-entete {
-				-webkit-box-flex: 1;
-    			-ms-flex: auto;
 				flex: auto;
 			}
 
@@ -868,8 +861,6 @@
 			}
 
 			.abo-gabarit-page__corps {
-				-webkit-box-flex: 1;
-				-ms-flex: auto;
 				flex: auto;
 				width: 100%;
 				max-width: var(--abo-page-max-width);
@@ -897,8 +888,6 @@
 
 			.abo-menu-secondaire__liste {
 				display: flex;
-				-webkit-box-align: end;
-    			-ms-flex-align: end;
         		align-items: flex-end;
 				list-style-type: none;
 				max-width: var(--abo-page-max-width);
@@ -977,8 +966,6 @@
 			}
 
 			.abo-smart-etapes-sejour__etape-courante {
-				-webkit-box-flex: 1;
-				-ms-flex: auto;
 				flex: auto;
 			}
 
@@ -1311,7 +1298,7 @@
 
 		<style>
 			/* Thème ulaval */
-			/* :root {
+			body[data-abo-theme="ulaval"] {
 				--brand-primaire: rgb(9, 108, 220);
 				--brand-secodaire: #FFC103;
 				--brand-bandeau-hauteur: 8px;
@@ -1323,10 +1310,10 @@
 				--brand-lien-menu-couleur-texte-selected: #F9F9F9;
 				--brand-lien-menu-couleur-fond-hover: rgba(0, 0, 0, 0.2);
 				--brand-lien-menu-couleur-fond-selected: rgba(0, 0, 0, 0.5);
-			} */
+			}
 
 			/* Thème udem */
-			/* :root {
+			body[data-abo-theme="udem"] {
 				--brand-primaire: #0039c9;
 				--brand-secodaire: #0B113A;
 				--brand-bandeau-hauteur: 0px;
@@ -1338,10 +1325,10 @@
 				--brand-lien-menu-couleur-texte-selected: #FFFFFF;
 				--brand-lien-menu-couleur-fond-hover: rgba(0, 0, 0, 0.05);
 				--brand-lien-menu-couleur-fond-selected: #0B113A;
-			} */
+			} 
 
 			/* Thème udes */
-			/* :root {
+			body[data-abo-theme="udes"] {
 				--brand-primaire: #096E3F;
 				--brand-secodaire: #096E3F;
 				--brand-bandeau-hauteur: 18px;
@@ -1349,10 +1336,10 @@
 				--brand-bouton-entete-couleur-fond-selected: rgba(9, 110, 63, .2);
 				--brand-lien-menu-couleur-texte-selected: #fff;
 				--brand-lien-menu-couleur-fond-selected: #096E3F;
-			} */
+			} 
 
 			/* Thème cegeplimoilou */
-			/* :root {
+			body[data-abo-theme="cegeplimoilou"] {
 				--brand-primaire: #15428f;
 				--brand-secodaire: #009892;
 				--brand-logo-couleur: #fff;
@@ -1371,7 +1358,7 @@
 				--brand-lien-menu-couleur-texte-selected: #000;
 				--brand-lien-menu-couleur-fond-hover: #15428f;
 				--brand-lien-menu-couleur-fond-selected: #009892;
-			} */
+			}
 		</style>
 	</head>
 	<body>
@@ -1402,6 +1389,7 @@
 									class="abo-smart-entete-app__svg-desktop"
 									role="img"
 									aria-label="Logo ABEO"
+									width="140px"
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 1154.8 262.6"
 								>
@@ -1411,6 +1399,7 @@
 									class="abo-smart-entete-app__svg-mobile"
 									role="img"
 									aria-label="Logo ABEO"
+									width="32px"
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 982.1 984.7"
 								>
@@ -1627,7 +1616,7 @@
 				</header>
 				<!-- DÉBUT slot "menu-mobile" du composant <abo-gabarit-page /> -->
 				<!-- FIN slot "menu-mobile" du composant <abo-gabarit-page /> -->
-				<div class="abo-gabarit-page__corps">
+				<div class="abo-gabarit-page__corps abo--no-padding-mobile">
 					<!-- DÉBUT slot default du composant <abo-gabarit-page /> -->
 					<!-- DÉBUT <router-view /> du composant <abo-smart-page-sejour /> -->
 					<!-- DÉBUT du composant <abo-smart-etapes-sejour /> -->
@@ -1792,7 +1781,76 @@
 							</div>
 							<div class="abo-boite-etape-sejour__corps">
 								<!-- DÉBUT slot default du composant <abo-boite-etape-sejour /> -->
-								slot: default
+								<form
+									id="nom-form-uuid"
+									class="abo-smart-sejour-etape-nature__corps"
+									action="#"
+								>
+
+									<p>
+										<label for="selectTheme">Abo thème</label>
+										<select id="selectTheme">
+											<option value="default">Défaut</option>
+											<option value="ulaval">Université Laval</option>
+											<option value="udem">Université de Montréal</option>
+											<option value="udes">Université de Sherbrooke</option>
+											<option value="cegeplimoilou">Cégep Limoilou</option>
+										</select>
+									</p>
+									<p>
+										
+										<input 
+											id="checkEnteteFixe"
+											type="checkbox"
+											name="checkEnteteFixe"
+										>
+										<label for="checkEnteteFixe">Entête en position fixed (breakpoint smAndUp)</label>
+									</p>
+									<p>
+										<input 
+											id="checkBarreOutils"
+											type="checkbox"
+											name="checkBarreOutils"
+										>
+										<label for="checkBarreOutils">Afficher la barre d'outils (breakpoint mobile)</label>
+									</p>
+									<p>
+										<input 
+											id="checkBoutonMonCompteSelected"
+											type="checkbox"
+											name="checkBoutonMonCompteSelected"
+										>
+										<label for="checkBoutonMonCompteSelected">Bouton «&nbsp;Mon compte&nbsp;» (abo-bouton-compte-entete-app) selected (breakpoint smAndUp)</label>
+									</p>
+									<p>
+										<input 
+											id="checkRetirerPaddingCorpsGabaritPage"
+											type="checkbox"
+											name="checkRetirerPaddingCorpsGabaritPage"
+											checked
+										>
+										<label for="checkRetirerPaddingCorpsGabaritPage">Retirer le padding du corps du abo-gabarit-page (breakpoint mobile)</label>
+									</p>
+									<p>
+										<input 
+											id="checkBoutonActionsSticky"
+											type="checkbox"
+											name="checkBoutonActionsSticky"
+											checked
+										>
+										<label for="checkBoutonActionsSticky">Boutons d'action du abo-boite-etape-sejour en position sticky (breakpoint smAndUp)</label>
+									</p>
+									<p>
+										<label for="selectAjoutContenu">Ajouter du contenu au formulaire</label>
+										<select id="selectAjoutContenu">
+											<option value="0">Aucun</option>
+											<option value="2">2 paragraphes</option>
+											<option value="5" selected>5 paragraphes</option>
+											<option value="10">10 paragraphes</option>
+										</select>
+									</p>
+									<div id="zoneContenu"></div>
+								</form>
 								<!-- FIN slot default du composant <abo-boite-etape-sejour /> -->
 							</div>
 							<div class="abo-boite-etape-sejour__pied abo--position-sticky"><!-- Retirer la position sticky 
@@ -1893,27 +1951,117 @@
 				);
 		
 			/**
-			 * Gestion de l'affiche de l'entête et de la barre d'outils
+			 * Formulaire de configuration de la page
 			*/
 
-			const entetePositionFixedDesktop = false;
-			const afficherBarreOutilsMobile = false;
-			const retirerPaddingCorpsGabaritPage = true;
+			const refSelectTheme = document.getElementById('selectTheme');
 
-			if (entetePositionFixedDesktop) {
-				document.querySelector('.abo-smart-entete-app').classList.add('abo--position-fixed');
-			}
+			refSelectTheme.addEventListener('change', () => {
+				document.body.setAttribute('data-abo-theme', refSelectTheme.value);
+			});
+			
+			// Entete fixe
+			const refCheckEnteteFixe = document.getElementById('checkEnteteFixe');
 
-			if (afficherBarreOutilsMobile) {
-				document.querySelector('.abo-barre-outils').classList.remove('abo--hidden');
-				document.querySelector('.abo-smart-app-root').classList.remove('abo--etape-bloquee-outils-hidden');
-			} else if (!breackpointIsSmAndUp) {
-				document.querySelector('[data-go-to="menu"]').remove();
-			}
+			refCheckEnteteFixe.addEventListener('change', () => {
+				document.querySelector('.abo-smart-entete-app').classList.toggle('abo--position-fixed');
+			});
+			
+			// Barre d'outils
+			const refCheckBarreOutils = document.getElementById('checkBarreOutils');
 
-			if (retirerPaddingCorpsGabaritPage) {
-				document.querySelector('.abo-gabarit-page__corps').classList.add('abo--no-padding-mobile');
+			const afficherLienGoToMenu = () => {
+				const refLienGoToMenu = document.querySelector('[data-go-to="menu"]');
+				if (!breackpointIsSmAndUp) {
+					if (refCheckBarreOutils.checked) {
+						refLienGoToMenu.removeAttribute('style');
+					} else {
+						refLienGoToMenu.style.display = 'none';
+					}
+				} else {
+					refLienGoToMenu.removeAttribute('style');
+				}
+			};
+
+			afficherLienGoToMenu();
+
+			refCheckBarreOutils.addEventListener('change', () => {
+				document.querySelector('.abo-barre-outils').classList.toggle('abo--hidden');
+				document.querySelector('.abo-smart-app-root').classList.toggle('abo--etape-bloquee-outils-hidden');
+				
+				afficherLienGoToMenu();
+			});
+			
+			// Bouton mon compte
+			const refCheckBoutonMonCompteSelected = document.getElementById('checkBoutonMonCompteSelected');
+			const refBoutonMonCompte = document.querySelector('.abo-bouton-compte-entete-app');
+			
+			const toogleBoutonMonCompte = (expended) => {
+				if (expended) {
+					refBoutonMonCompte.classList.add('abo--selected');
+				} else {
+					refBoutonMonCompte.classList.remove('abo--selected');
+				}
+
+				refBoutonMonCompte.setAttribute('aria-expanded', expended.toString());
+
+				if (refCheckBoutonMonCompteSelected.checked !== expended) {
+					refCheckBoutonMonCompteSelected.checked = expended;
+				}
+			};
+
+			refBoutonMonCompte.addEventListener('click', () => 
+				toogleBoutonMonCompte(!refCheckBoutonMonCompteSelected.checked)
+			);
+			refCheckBoutonMonCompteSelected.addEventListener('change', () => 
+				toogleBoutonMonCompte(refCheckBoutonMonCompteSelected.checked)
+			);
+
+			// Padding du corps du gabarit de page
+			const refCheckRetirerPaddingCorpsGabaritPage = document.getElementById('checkRetirerPaddingCorpsGabaritPage');
+
+			refCheckRetirerPaddingCorpsGabaritPage.addEventListener('change', () => {
+				const refCorps = document.querySelector('.abo-gabarit-page__corps');
+
+				if (refCheckRetirerPaddingCorpsGabaritPage.checked) {
+					refCorps.classList.add('abo--no-padding-mobile');
+				} else {
+					refCorps.classList.remove('abo--no-padding-mobile');
+				}
+			});
+
+			// Boutons d'action sticky
+			const refCheckBoutonActionsSticky = document.getElementById('checkBoutonActionsSticky');
+
+			refCheckBoutonActionsSticky.addEventListener('change', () => {
+				const refPied = document.querySelector('.abo-boite-etape-sejour__pied');
+				if (refCheckBoutonActionsSticky.checked) {
+					refPied.classList.add('abo--position-sticky');
+				} else {
+					refPied.classList.remove('abo--position-sticky');
+				}
+			});
+
+			// Contrôle ajout de contenu dans le corps de l'étape
+			const refAjoutContenu = document.getElementById('selectAjoutContenu');
+
+			const ajouterParagrapheDansZoneContenu = () => {
+				const refZoneContenu = document.getElementById(
+					'zoneContenu'
+				);
+
+				const TEXTE_LOREM = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Tenetur at doloribus eaque iste est sint aperiam minus cumdel eniti voluptates. Dolorem reiciendis maiores molestiae incidunt pariatur ipsam ipsum cum nobis?';
+			
+				let innerHtml = '';
+				for (let index = 0; index < parseInt(refAjoutContenu.value); index++) {
+					innerHtml += `<p>${TEXTE_LOREM}</p>`
+				}
+				refZoneContenu.innerHTML = innerHtml;
 			}
+			
+			ajouterParagrapheDansZoneContenu();
+
+			refAjoutContenu.addEventListener('change', ajouterParagrapheDansZoneContenu);
 
 
 			/**
@@ -1937,39 +2085,18 @@
 			refContenuAccordeonBoiteEtapeSejour.innerHTML = refBarreEtapesSejour.innerHTML;
 
 			/**
-			 *  Contenu de l'étape « Nature du séjour »
+			 *  Valiation du formulaire
 			*/
+			const refFormNatureSejour = document.getElementById('nom-form-uuid');
 			const refSmartSejourEtapeNature = document.querySelector('.abo-smart-sejour-etape-nature');
-
-			const refDefaultSlotBoiteSejour = refSmartSejourEtapeNature.querySelector(
-				'.abo-boite-etape-sejour__corps'
-			);
-
-			const TEXTE_LOREM = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Tenetur at doloribus eaque iste est sint aperiam minus cumdel eniti voluptates. Dolorem reiciendis maiores molestiae incidunt pariatur ipsam ipsum cum nobis?';
-
-			const refFormNatureSejour = document.createElement('form');
-			refFormNatureSejour.id = "nom-form-uuid";
-			refFormNatureSejour.className = 'abo-smart-sejour-etape-nature__corps'
-			refFormNatureSejour.action = '#';
-
+			
 			refFormNatureSejour.addEventListener('submit', (e) => {
 				e.preventDefault();
-
+				
 				// Si le formulaire est valide: naviguer à la prochaine étape
 				window.scrollTo(0, refSmartSejourEtapeNature?.offsetTop ?? 0);
 				refSmartSejourEtapeNature?.focus();
-			})
-			
-			const nombreParagraphes = 10;
-			
-			for (let index = 0; index < nombreParagraphes; index++) {
-				const refParagraphe = document.createElement('p');
-
-				refParagraphe.innerText = TEXTE_LOREM;
-				refFormNatureSejour.append(refParagraphe);
-			}
-
-			refDefaultSlotBoiteSejour.append(refFormNatureSejour);
+			});
 
 			/**
 			 *  Ajouter l'année courante dans le pied de page
