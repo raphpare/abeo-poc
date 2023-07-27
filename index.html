@@ -796,6 +796,8 @@
 			.abo-barre-outils__etiquette {
 				font-size: calc(10 / var(--abo-font-size) * 1rem);
 				font-weight: var(--abo-font-weight-medium);
+				text-align: center;
+    			width: 78px;
 			}
 
 			@media (min-width: 375px) {
@@ -1480,7 +1482,7 @@
 						<li>
 							<a class="abo-menu-principal__lien" href="#" aria-current="page">
 								<i class="abo-svg abo-menu-principal__icone" aria-hidden="true">X</i>
-								<span class="abo-menu-principal__etiquette">Séjours</span>
+								<span class="abo-menu-principal__etiquette">Mes séjours</span>
 							</a>
 						</li>
 						<li>
@@ -1510,7 +1512,7 @@
 						<li>
 							<a class="abo-barre-outils__lien" href="#"  aria-current="page">
 								<i class="abo-svg abo-barre-outils__icone" aria-hidden="true">X</i>
-								<span class="abo-barre-outils__etiquette">Séjours</span>
+								<span class="abo-barre-outils__etiquette">Mes séjours</span>
 							</a>
 						</li>
 						<li>
@@ -1563,7 +1565,7 @@
 										<!-- FIN slot "prepend" du composant <abo-link /> -->
 									</span>
 									<span class="abo-link__label">
-										Séjours
+										Mes séjours
 									</span>
 									<span
 										v-if="$slots['append']"
