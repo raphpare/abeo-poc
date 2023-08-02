@@ -212,7 +212,7 @@
 
 			.abo-button.abo--variant-secondary,
 			.abo-button.abo--variant-tertiary {
-				background-color: rgba(255, 255, 255, 0);
+				background-color: var(--abo-blanc);
 				color: var(--brand-primaire);
 			}
 
@@ -885,39 +885,121 @@
 			/******** abeo-app/components/abo-menu-secondaire ********/
 
 			.abo-menu-secondaire {
+				position: relative;		
 				border-bottom: 1px solid var(--abo-border-color);
+				max-width: 100%;
+				
+			}
+
+			.abo-menu-secondaire__degrade,
+			.abo-menu-secondaire__nav {
+				max-width: var(--abo-page-max-width);
+				margin: 0 auto -1px;
+			}
+
+			.abo-menu-secondaire__degrade {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 1px;
+				left: 0;
+				background: none;
+				pointer-events: none;
+			}
+
+			.abo-menu-secondaire__degrade::before,
+			.abo-menu-secondaire__degrade::after {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				content: '';
+				width: calc(var(--abo-space) + 4px);
+				background-color: var(--abo-neutral-5);
+			}
+
+			.abo-menu-secondaire__degrade::before {
+				left: 0;
+				background: linear-gradient(90deg, var(--abo-neutral-5) 10%, rgba(255, 255, 255, 0) 100%);
+			}
+
+			.abo-menu-secondaire__degrade::after {
+				right: 0;
+				width: var(--abo-space-3xl);
+				background: linear-gradient(-90deg, var(--abo-neutral-5) 10%, rgba(255, 255, 255, 0) 100%);
+			}
+
+			@media (min-width: 768px) {
+				.abo-menu-secondaire__degrade::before {
+					width: calc(var(--abo-space-lg) + 4px);
+				}
+			}
+
+
+			.abo-menu-secondaire__nav {
+				overflow: auto hidden;
+				white-space: nowrap;
+				-webkit-overflow-scrolling: touch;
+  				-ms-overflow-style: -ms-autohiding-scrollbar; 
+				padding: 0 var(--abo-space);
+			}
+
+			.abo-menu-secondaire__nav::-webkit-scrollbar {
+				display: none;
+			}
+
+			@media (min-width: 768px) {
+				.abo-menu-secondaire__nav {
+					padding-right: var(--abo-space-lg);
+					padding-left: var(--abo-space-lg);
+				}
 			}
 
 			.abo-menu-secondaire__liste {
 				display: flex;
         		align-items: flex-end;
 				list-style-type: none;
-				max-width: var(--abo-page-max-width);
-				margin: 0 auto -1px;
-				padding: 0 var(--abo-space);
+				padding: 0 var(--abo-space-lg) 0 0;
+				margin: 0;
+				
 			}
 
 			.abo-menu-secondaire__liste > :not(:last-child) {
-				margin-right: var(--abo-space-lg);
+				margin-right: var(--abo-space-md);
 			}
 
 			@media (min-width: 768px) {
-				.abo-menu-secondaire__liste {
-					padding-right: var(--abo-space-lg);
-					padding-left: var(--abo-space-lg);
+				.abo-menu-secondaire__liste > :not(:last-child) {
+					margin-right: var(--abo-space-lg);
 				}
 			}
 
 			.abo-menu-secondaire__lien {
 				transition: color 0.3s ease, border-color 0.3s ease;
 				display: flex;
-				padding-bottom: calc(var(--abo-space-md) - var(--abo-space-xs));
+				padding-bottom: calc(var(--abo-space-md) - var(--abo-space-xs) - var(--abo-space-2xs) );
 				color: var(--abo-neutral-75);
 				text-decoration: none;
 				border: none;
 				border-bottom: var(--abo-space-2xs) solid rgba(255, 255, 255, 0);
 				font-weight: var(--abo-font-weight-medium);
 				outline-color: var(--brand-primaire);
+			}
+
+			.abo-menu-secondaire__liste > :last-child .abo-menu-secondaire__lien {
+				margin-right: var(--abo-space-3xl);
+			}
+
+			@media (min-width: 768px) {
+				.abo-menu-secondaire__lien {
+					padding-bottom: calc(var(--abo-space-md) - var(--abo-space-xs));
+				}
+			}
+
+
+			@media (max-width: 767px) {
+				.abo-menu-secondaire__liste {
+					font-size: calc(var(--abo-font-size-sm) / var(--abo-font-size) * 1rem);
+				}
 			}
 
 			.abo-menu-secondaire__lien:not(:active):hover,
@@ -1591,31 +1673,53 @@
 					</div>
 					<!-- DÉBUT slot "menu-secondaire" du composant <abo-gabarit-page /> -->
 					<!-- DÉBUT du composant <abo-menu-secondaire /> -->
-					<nav
+					<div
 						v-if="$slots['menu-secondaire']"
 						class="abo-menu-secondaire abo-gabarit-page__menu-secondaire"
 						aria-label="Menu secondaire - Créer un séjour"
 					>
-						<ul class="abo-menu-secondaire__liste">
-							<li>
-								<a 
-									class="abo-menu-secondaire__lien"
-									href="#"
-									aria-current="page"
-								>
-									Séjour
-								</a>
-							</li>
-							<li>
-								<a
-									class="abo-menu-secondaire__lien"
-									href="#"
-								>
-									Conseils et recommandations
-								</a>
-							</li>
-						</ul>
-					</nav>
+						<div class="abo-menu-secondaire__degrade" aria-hidden="true"></div>
+						<nav class="abo-menu-secondaire__nav">
+							<ul class="abo-menu-secondaire__liste">
+								<li>
+									<a 
+										class="abo-menu-secondaire__lien"
+										href="#"
+										aria-current="page"
+									>
+										Séjour
+									</a>
+								</li>
+							
+								<li>
+									<a
+										class="abo-menu-secondaire__lien"
+										href="#"
+										
+									>
+										Conseils
+									</a>
+								</li>
+								<li>
+									<a
+										class="abo-menu-secondaire__lien"
+										href="#"
+									>
+										Participants
+									</a>
+								</li>
+								<li>
+									<a
+										class="abo-menu-secondaire__lien"
+										href="#"
+									>
+									
+										Historique
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
 					<!-- DÉBUT du composant <abo-menu-secondaire /> -->
 					<!-- FIN slot "menu-secondaire" du composant <abo-gabarit-page /> -->
 				</header>
@@ -1735,7 +1839,7 @@
 								</ol>
 							</nav>
 							<!-- FIN du composant <abo-barre-etapes-sejour /> -->
-							<button class="abo-button abo--variant-secondary abou-mt-md abou-full-width">Conseils et recommandations</button>
+							<button class="abo-button abo--variant-secondary abou-mt-md abou-full-width" disabled>Soumettre votre séjour</button>
 						</div>
 						<!-- DÉBUT <router-view /> du composant <abo-smart-etapes-sejour /> -->
 						<!-- DÉBUT du composant <abo-smart-sejour-etape-nature /> -->
@@ -1936,6 +2040,7 @@
 		<script>
 			const breackpointIsSmAndUp = window.innerWidth >= 768;
 
+			
 			/**
 			 * Gestion la navigation des liens « Aller au contenu »
 			*/
@@ -1953,6 +2058,7 @@
 					)?.focus()
 				);
 		
+
 			/**
 			 * Formulaire de configuration de la page
 			*/
@@ -2080,12 +2186,14 @@
 				refEnteteAccordeonBoiteEtapeSejour.classList.toggle('abo--accordeon-ouvert');
 			});
 			
+
 			/**
 			 *  Clone de la barre étapes séjour en version mobile
 			*/
 
 			const refBarreEtapesSejour = document.querySelector('.abo-barre-etapes-sejour');
 			refContenuAccordeonBoiteEtapeSejour.innerHTML = refBarreEtapesSejour.innerHTML;
+
 
 			/**
 			 *  Valiation du formulaire
@@ -2100,6 +2208,80 @@
 				window.scrollTo(0, refSmartSejourEtapeNature?.offsetTop ?? 0);
 				refSmartSejourEtapeNature?.focus();
 			});
+
+
+			/**
+			 *  Gestion du défilement horizontal du AboMenuSecondaire
+			*/
+
+			const gererDefilementHorizontalMenuSecondaire = () => {
+				const getStyle = (element, styleProp) => {
+					if (element.currentStyle) {
+						return element.currentStyle[styleProp];
+					}
+					
+					if (window.getComputedStyle) {
+						return window.getComputedStyle(element, null).getPropertyValue(styleProp);
+					}
+				}
+
+				const isElementPleinementVisible = (element, container = document.body, threshold = 0) => {
+					const containerRect = container.getBoundingClientRect();
+					const elementRect = element.getBoundingClientRect();
+					
+					const elementTop = elementRect.top + parseInt(getStyle(element, 'margin-top'));
+					const elementBottom = elementRect.bottom + parseInt(getStyle(element, 'margin-bottom'));
+					const elementLeft = elementRect.left + parseInt(getStyle(element, 'margin-left'));
+					const elementRight = elementRect.right + parseInt(getStyle(element, 'margin-right')) + threshold;
+					
+					return (
+						elementTop >= containerRect.top &&
+						elementBottom <= containerRect.bottom &&
+						elementLeft >= containerRect.left &&
+						elementRight <= containerRect.right
+					);
+				}
+
+				const refNav = document.querySelector('.abo-menu-secondaire__nav');
+				const refListe = document.querySelector('.abo-menu-secondaire__liste');
+				const refCurrentItem = document.querySelector('.abo-menu-secondaire__lien[aria-current="page"]').parentElement;
+				
+				if (!isElementPleinementVisible(refCurrentItem, refListe, 32)) {
+					refNav.scrollLeft = refNav.scrollWidth > refCurrentItem.offsetLeft ? refNav.scrollWidth - parseInt(getStyle(refCurrentItem, 'width')) : refCurrentItem.offsetLeft;
+				}
+							
+				let mouseDown = false;
+				let startX = 0; 
+				let scrollLeft = 0;
+	
+				const startDragging = (event) => {
+					mouseDown = true;
+					startX = event.pageX - refNav.offsetLeft;
+					scrollLeft = refNav.scrollLeft;
+				};
+
+				const stopDragging = (e) => {
+					e.preventDefault();
+					mouseDown = false;
+				};
+	
+				refNav.addEventListener('mousemove', (event) => {
+					event.preventDefault();
+
+					if(!mouseDown) return; 
+
+					const x = event.pageX - refNav.offsetLeft;
+					const scroll = x - startX;
+					refNav.scrollLeft = scrollLeft - scroll;
+				});
+	
+				refNav.addEventListener('mousedown', startDragging, false);
+				refNav.addEventListener('mouseup', stopDragging, false);
+				refNav.addEventListener('mouseleave', stopDragging, false);
+			}
+
+			gererDefilementHorizontalMenuSecondaire();
+
 
 			/**
 			 *  Ajouter l'année courante dans le pied de page
