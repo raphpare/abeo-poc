@@ -244,31 +244,43 @@
             resize: vertical;
         }
 
+        .abo-formfield__content  {
+            display: flex;
+            align-items: center;
+            margin-top: var(--field-margin-top);
+        }
+
+        .abo-formfield__content > :not(:first-child)  {
+           margin-left: var(--abo-space-xs);
+        }
+
         .abo-formfield__field {
             position: relative;
             display: flex;
             align-items: center;
+            flex: auto;
             width: 100%;
             border: 1px solid var(--border-color);
             border-radius: var(--abo-border-radius);
             background-color: var(--background-color);
-            margin-top: var(--field-margin-top);
         }
 
         .abo-formfield__asterisk {
             color: var(--error);
         }
 
-        .abo-formfield__field-prepend,
-        .abo-formfield__field-append {
+        .abo-formfield__prepend,
+        .abo-formfield__prepend-inside,
+        .abo-formfield__append-inside,
+        .abo-formfield__append  {
             flex-shrink: 0;
         }
 
-        .abo-formfield__field-prepend {
+        .abo-formfield__prepend-inside {
             padding-left: var(--field-padding-inline);
         }
 
-        .abo-formfield__field-append {
+        .abo-formfield__append-inside {
             padding-right: var(--field-padding-inline);
         }
 
@@ -379,64 +391,79 @@
     <body>
         <!-- DÉBUT composant AboFormfield -->
         <div class="abo-formfield" data-test-ui="formulaireCreationCompte">
-            <div class="abo-formfield__field">
+            <div class="abo-formfield__content">
                 <!-- DÉBUT slot prepend -->
-                <!-- <span
+                <!-- <div
                     v-if="$slots.prepend"
-                    class="abo-formfield__field-prepend"
+                    class="abo-formfield__prepend"
                 >
                     <slot name="prepend" />
-                </span> -->
+                </div> -->
                 <!-- FIN slot prepend -->
-                <div class="abo-formfield__control">
-                    <span
-                        class="abo-formfield__hidden-label"
-                        aria-hidden="true"
+                <div class="abo-formfield__field">
+                    <!-- DÉBUT slot prependInside -->
+                    <!-- <div
+                        v-if="$slots.prependInside"
+                        class="abo-formfield__prepend-inside"
                     >
-                        <span class="abo-formfield__hidden-label-content">
+                        <slot name="prependInside" />
+                    </div> -->
+                    <!-- FIN slot prependInside -->
+                    <div class="abo-formfield__control">
+                        <span
+                            class="abo-formfield__hidden-label"
+                            aria-hidden="true"
+                        >
+                            <span class="abo-formfield__hidden-label-content">
+                                <span class="abo-formfield__label-value">
+                                    <slot name="label" /></span
+                                ><span
+                                    class="abo-formfield__asterisk"
+                                    aria-hidden="true"
+                                ></span>
+                            </span>
+                        </span>
+                        <label class="abo-formfield__label" for="inputUuid">
                             <span class="abo-formfield__label-value">
                                 <slot name="label" /></span
                             ><span
                                 class="abo-formfield__asterisk"
                                 aria-hidden="true"
                             ></span>
-                        </span>
-                    </span>
-                    <label class="abo-formfield__label" for="inputUuid">
-                        <span class="abo-formfield__label-value">
-                            <slot name="label" /></span
-                        ><span
-                            class="abo-formfield__asterisk"
-                            aria-hidden="true"
-                        ></span>
-                    </label>
-                    <!-- DÉBUT slot default -->
-                    <input
-                        type="text"
-                        id="inputUuid"
-                        aria-describedby="messageUuid"
-                    />
-                    <!-- <select
-                        id="inputUuid"
-                        name="options"
-                        aria-describedby="messageUuid"
-                    >
-                        <option value="a">A</option>
-                        <option value="b">B</option>
-                        <option value="c">C</option>
-                    </select>
-                    <textarea
-                        id="inputUuid"
-                        name="texteLong"
-                        rows="2"
-                        aria-describedby="messageUuid"
-                    ></textarea> -->
-                    <!-- FIN slot default -->
+                        </label>
+                        <!-- DÉBUT slot default -->
+                        <input
+                            type="text"
+                            id="inputUuid"
+                            aria-describedby="messageUuid"
+                        />
+                        <!-- <select
+                            id="inputUuid"
+                            name="options"
+                            aria-describedby="messageUuid"
+                        >
+                            <option value="a">A</option>
+                            <option value="b">B</option>
+                            <option value="c">C</option>
+                        </select>
+                        <textarea
+                            id="inputUuid"
+                            name="texteLong"
+                            rows="2"
+                            aria-describedby="messageUuid"
+                        ></textarea> -->
+                        <!-- FIN slot default -->
+                    </div>
+                    <!-- DÉBUT slot appendInside -->
+                    <!-- <div v-if="$slots.appendInside" class="abo-formfield__append-inside">
+                        <slot name="appendInside" />
+                    </div> -->
+                    <!-- FIN slot appendInside -->
                 </div>
                 <!-- DÉBUT slot append -->
-                <!-- <span v-if="$slots.append" class="abo-formfield__field-append">
-                    <slot name="append" />
-                </span> -->
+                    <!-- <div v-if="$slots.append" class="abo-formfield__append">
+                        <slot name="append" />
+                    </div> -->
                 <!-- FIN slot append -->
             </div>
             <!-- DÉBUT slot menu -->
@@ -586,7 +613,7 @@
                 ).forEach((ref) => {
                     ref.innerHTML = props.label || '';
                 });
-                caculerHauteurLabel();
+                calculerHauteurLabel();
             };
 
             const setLabelUpProp = () => {
@@ -712,7 +739,7 @@
                         : 'display: block';
             };
 
-            const caculerHauteurLabel = () => {
+            const calculerHauteurLabel = () => {
                 const refHiddenLabel = refFormfield.querySelector(
                     '.abo-formfield__hidden-label'
                 );
@@ -745,7 +772,7 @@
             };
 
             const resizeObserver = new ResizeObserver((entries) => {
-                caculerHauteurLabel();
+                calculerHauteurLabel();
             });
 
             const updateModel = () => {
