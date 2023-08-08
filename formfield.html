@@ -160,7 +160,7 @@
         }
 
         body {
-            padding: 32px 16px;
+            padding: var(--abo-space-lg) var(--abo-space);
         }
 
         /******** abeo-app/commons/components/formfield ********/
@@ -204,17 +204,17 @@
             --field-color: var(--abo-noir);
         }
 
+        .abo-formfield.abo--disabled .abo-formfield__field {
+            opacity: 0.3;
+            border-style: dashed;
+        }
+
         .abo-formfield.abo--transition-active .abo-formfield__label {
             transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .abo-formfield.abo--transition-active .abo-formfield__field {
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .abo-formfield.abo--disabled .abo-formfield__field {
-            opacity: 0.5;
-            border-style: dashed;
         }
 
         .abo-formfield input,
