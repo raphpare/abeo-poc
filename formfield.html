@@ -232,7 +232,7 @@
             padding: var(--field-padding-block) var(--field-padding-inline);
             color: var(--field-color);
             max-width: 100%;
-            font-weight: var(--abo-font-weight-light);
+            font-weight: inherit;
         }
 
         .abo-formfield input,
@@ -613,6 +613,7 @@
                 ).forEach((ref) => {
                     ref.innerHTML = props.label || '';
                 });
+
                 calculerHauteurLabel();
             };
 
