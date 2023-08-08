@@ -524,7 +524,7 @@
                 onUpdate();
             };
 
-            const onUpdateProp = (updatedProps) => {
+            const updateProps = (updatedProps) => {
                 props = {
                     ...props,
                     ...updatedProps,
@@ -544,7 +544,7 @@
             return {
                 onMounted,
                 onUpdate,
-                onUpdateProp,
+                updateProps,
                 onBeforeUnmount,
                 onUnmount,
             };
@@ -691,7 +691,7 @@
             };
 
             const setErrorMessageProp = () => {
-                controlMessage.onUpdateProp({
+                controlMessage.updateProps({
                     errorMessage: props.errorMessage,
                 });
 
@@ -702,7 +702,7 @@
             };
 
             const setHelperMessageProp = () => {
-                controlMessage.onUpdateProp({
+                controlMessage.updateProps({
                     helperMessage: props.helperMessage,
                 });
 
@@ -786,7 +786,7 @@
                 });
             };
 
-            const onUpdateProp = (updatedProps) => {
+            const updateProps = (updatedProps) => {
                 props = {
                     ...props,
                     ...updatedProps,
@@ -809,7 +809,7 @@
             return {
                 onMounted,
                 onUpdate,
-                onUpdateProp,
+                updateProps,
                 onBeforeUnmount,
                 onUnmount,
             };
@@ -819,7 +819,7 @@
 
         formfield.onMounted();
 
-        formfield.onUpdateProp({
+        formfield.updateProps({
             vModel: '',
             label: 'Étiquette très très très très très très très longue',
             showAsterisk: true,
