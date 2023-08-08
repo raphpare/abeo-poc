@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AboFormfield</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <style>
+        :root {
+            --brand-primaire: #0039c9;
+            --brand-secodaire: #002c9b;
+            --brand-bandeau-hauteur: 10px;
+            --brand-bandeau-couleur-fond: #262626;
+            --brand-logo-couleur: #262626;
+            --brand-entete-couleur-fond: #ffffff;
+            --brand-entete-couleur-bordure: #e0e0e0;
+            --brand-bouton-entete-couleur-texte: #5c5c5c;
+            --brand-bouton-entete-couleur-texte-hover: #000000;
+            --brand-bouton-entete-couleur-texte-selected: #000000;
+            --brand-bouton-entete-couleur-fond-hover: #ebebeb;
+            --brand-bouton-entete-couleur-fond-selected: #cce0f4;
+            --brand-menu-couleur-fond: #f5f5f5;
+            --brand-lien-menu-couleur-texte: #5c5c5c;
+            --brand-lien-menu-couleur-texte-hover: #000000;
+            --brand-lien-menu-couleur-texte-selected: #000000;
+            --brand-lien-menu-couleur-fond-hover: #ebebeb;
+            --brand-lien-menu-couleur-fond-selected: #cce0f4;
+
+            --abo-space-2xs: 4px;
+            --abo-space-xs: 8px;
+            --abo-space-sm: 12px;
+            --abo-space: 16px;
+            --abo-space-md: 24px;
+            --abo-space-lg: 32px;
+            --abo-space-xl: 40px;
+            --abo-space-2xl: 48px;
+            --abo-space-3xl: 56px;
+            --abo-space-4xl: 64px;
+
+            --abo-border-radius-sm: 4px;
+            --abo-border-radius: 8px;
+
+            --abo-font-weight-light: 300;
+            --abo-font-weight-medium: 500;
+            --abo-font-weight-semi-bold: 600;
+            --abo-font-weight-bold: 700;
+
+            --abo-font-size-xs: 12;
+            --abo-font-size-sm: 14;
+            --abo-font-size: 16;
+            --abo-font-size-md: 18;
+            --abo-font-size-h1: 32;
+            --abo-font-size-h2: 28;
+            --abo-font-size-h3: 24;
+            --abo-font-size-h4: 20;
+
+            --abo-blanc: #fff;
+            --abo-noir: #000;
+            --abo-dark-text: #262626;
+            --abo-light-text: #f5f5f5;
+            --abo-border-color: #e0e0e0;
+
+            --abo-neutral-5: #f5f5f5;
+            --abo-neutral-10: #ebebeb;
+            --abo-neutral-30: #b3b3b3;
+            --abo-neutral-50: #808080;
+            --abo-neutral-75: #404040;
+            --abo-neutral-90: #262626;
+
+            --warning: #db7e00;
+            --error: #e30513;
+        }
+
+        /******** Reset et classes utilitaires ********/
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            color: var(--abo-dark-text);
+            font-size: 1rem;
+            font-weight: var(--abo-font-weight-light);
+        }
+
+        div {
+            margin: 0;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin-top: var(--abo-space-lg);
+            margin-bottom: 0;
+            font-weight: var(--abo-font-weight-bold);
+        }
+
+        h1:first-child,
+        h2:first-child,
+        h3:first-child,
+        h4:first-child,
+        h5:first-child,
+        h6:first-child {
+            margin-top: 0;
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: calc(
+                var(--abo-font-size-h1) / var(--abo-font-size) * 1rem
+            );
+        }
+
+        h2,
+        .abou-h2 {
+            font-size: calc(
+                var(--abo-font-size-h2) / var(--abo-font-size) * 1rem
+            );
+        }
+
+        h3,
+        .abou-h3 {
+            font-size: calc(
+                var(--abo-font-size-h3) / var(--abo-font-size) * 1rem
+            );
+        }
+
+        h3,
+        .abou-h4 {
+            font-size: calc(
+                var(--abo-font-size-h4) / var(--abo-font-size) * 1rem
+            );
+        }
+
+        button,
+        input {
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        p {
+            margin: var(--abo-space-sm) 0 0;
+        }
+
+        body {
+            padding: 32px 16px;
+        }
+
+        /******** abeo-app/commons/components/formfield ********/
+
+        .abo-formfield {
+            --interactivity-color: var(--brand-primaire);
+            --label-color: var(--abo-neutral-90);
+            --border-color: var(--abo-neutral-75);
+            --background-color: var(--abo-blanc);
+            --field-padding-block: var(--abo-space);
+            --field-padding-inline: 13px;
+            --field-min-height: 48px;
+            --field-margin-top: 0;
+            --field-color: inherit;
+            --max-width: 100%;
+
+            display: inline-flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 0;
+            max-width: var(--max-width);
+        }
+
+        .abo-formfield.abo--error {
+            --interactivity-color: var(--error);
+            --label-color: var(--error);
+            --border-color: var(--error);
+        }
+
+        .abo-formfield.abo--readonly {
+            --interactivity-color: var(--abo-neutral-75);
+            --label-color: var(--abo-neutral-50);
+            --border-color: var(--abo-neutral-30);
+            --field-color: var(--abo-neutral-75);
+        }
+
+        .abo-formfield.abo--disabled {
+            --interactivity-color: var(--abo-noir);
+            --label-color: var(--abo-noir);
+            --border-color: var(--abo-noir);
+            --field-color: var(--abo-noir);
+        }
+
+        .abo-formfield.abo--transition-active .abo-formfield__label {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .abo-formfield.abo--transition-active .abo-formfield__field {
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .abo-formfield.abo--disabled .abo-formfield__field {
+            opacity: 0.5;
+            border-style: dashed;
+        }
+
+        .abo-formfield input,
+        .abo-formfield textarea,
+        .abo-formfield select,
+        .abo-formfield [role='combobox'] {
+            appearance: none;
+            font-size: inherit;
+            font-family: inherit;
+            border: none;
+            outline: none;
+            width: 100%;
+            min-height: var(--field-min-height);
+            background: none;
+            padding: var(--field-padding-block) var(--field-padding-inline);
+            color: var(--field-color);
+            max-width: 100%;
+            font-weight: var(--abo-font-weight-light);
+        }
+
+        .abo-formfield textarea {
+            resize: vertical;
+        }
+
+        .abo-formfield__field {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            border-radius: var(--abo-border-radius);
+            background-color: var(--background-color);
+            margin-top: var(--field-margin-top);
+        }
+
+        .abo-formfield__asterisk {
+            color: var(--error);
+        }
+
+        .abo-formfield__field-prepend,
+        .abo-formfield__field-append {
+            flex-shrink: 0;
+        }
+
+        .abo-formfield__field-prepend {
+            padding-left: var(--field-padding-inline);
+        }
+
+        .abo-formfield__field-append {
+            padding-right: var(--field-padding-inline);
+        }
+
+        .abo-formfield__control {
+            position: relative;
+            flex: auto;
+            width: 100%;
+            max-width: 100%;
+            min-height: var(--field-min-height);
+        }
+
+        .abo-formfield.abo--focus .abo-formfield__field,
+        .abo-formfield:not(.abo--disabled) .abo-formfield__field:focus-within {
+            border-color: var(--interactivity-color);
+            box-shadow: 0 0 0 1px var(--interactivity-color);
+        }
+
+        .abo-formfield:not(.abo--disabled)
+            .abo-formfield__field:focus-within
+            .abo-formfield__label,
+        .abo-formfield.abo--label-up .abo-formfield__label {
+            transform: translate3d(4px, -50%, 0) scale(0.8);
+        }
+
+        .abo-formfield:not(.abo--disabled)
+            .abo-formfield__field:focus-within
+            .abo-formfield__control,
+        .abo-formfield.abo--label-up .abo-formfield__control {
+            position: unset;
+        }
+
+        .abo-formfield:not(.abo--disabled)
+            .abo-formfield__field:focus-within
+            .abo-formfield__label {
+            color: var(--interactivity-color);
+            pointer-events: auto;
+        }
+
+        .abo-formfield.abo--label-up .abo-formfield__label {
+            border-color: var(--interactivity-color);
+        }
+
+        .abo-formfield__hidden-label,
+        .abo-formfield__label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            padding: var(--field-padding-block) var(--field-padding-inline);
+            transform-origin: 0;
+            font-size: 1rem;
+            color: var(--label-color);
+            font-weight: var(--abo-font-weight-light);
+        }
+
+        .abo-formfield__hidden-label {
+            width: 100%;
+            opacity: 0;
+        }
+
+        .abo-formfield__hidden-label,
+        .abo-formfield__hidden-label-content {
+            display: inline-block;
+        }
+
+        .abo-formfield__label::before {
+            position: absolute;
+            top: calc(50% - 4px);
+            right: calc(var(--field-padding-inline) - var(--abo-space-2xs));
+            bottom: 16px;
+            left: calc(var(--field-padding-inline) - var(--abo-space-2xs));
+            z-index: -1;
+            content: '';
+            background-color: var(--background-color, #fff);
+        }
+
+        .abo-formfield__message {
+            margin-top: 6px; /* magic number */
+            padding-left: var(--field-padding-inline);
+        }
+
+        /******** abeo-app/commons/components/control-message ********/
+
+        .abo-control-message {
+            display: inline-flex;
+            flex-direction: column;
+            font-size: calc(
+                var(--abo-font-size-xs) / var(--abo-font-size) * 1rem
+            );
+        }
+
+        .abo-control-message > :not(:first-child) {
+            margin-top: var(--abo-space-2xs);
+        }
+
+        .abo-control-message__message {
+            margin: 0;
+        }
+
+        .abo-control-message__message > :not(:first-child) {
+            margin-left: var(--abo-space-2xs);
+        }
+
+        .abo-control-message__message.abo--error {
+            color: var(--error);
+        }
+    </style>
+    <body>
+        <!-- DÉBUT composant AboFormfield -->
+        <div class="abo-formfield" data-test-ui="formulaireCreationCompte">
+            <div class="abo-formfield__field">
+                <!-- DÉBUT slot prepend -->
+                <!-- <span
+                    v-if="$slots.prepend"
+                    class="abo-formfield__field-prepend"
+                >
+                    <slot name="prepend" />
+                </span> -->
+                <!-- FIN slot prepend -->
+                <div class="abo-formfield__control">
+                    <span
+                        class="abo-formfield__hidden-label"
+                        aria-hidden="true"
+                    >
+                        <span class="abo-formfield__hidden-label-content">
+                            <span class="abo-formfield__label-value">
+                                <slot name="label" /></span
+                            ><span
+                                class="abo-formfield__asterisk"
+                                aria-hidden="true"
+                            ></span>
+                        </span>
+                    </span>
+                    <label class="abo-formfield__label" for="inputUuid">
+                        <span class="abo-formfield__label-value">
+                            <slot name="label" /></span
+                        ><span
+                            class="abo-formfield__asterisk"
+                            aria-hidden="true"
+                        ></span>
+                    </label>
+                    <!-- DÉBUT slot default -->
+                    <input
+                        type="text"
+                        id="inputUuid"
+                        aria-describedby="messageUuid"
+                    />
+                    <!-- <select
+                        id="inputUuid"
+                        name="options"
+                        aria-describedby="messageUuid"
+                    >
+                        <option value="a">A</option>
+                        <option value="b">B</option>
+                        <option value="c">C</option>
+                    </select>
+                    <textarea
+                        id="inputUuid"
+                        name="texteLong"
+                        rows="2"
+                        aria-describedby="messageUuid"
+                    ></textarea> -->
+                    <!-- FIN slot default -->
+                </div>
+                <!-- DÉBUT slot append -->
+                <!-- <span v-if="$slots.append" class="abo-formfield__field-append">
+                    <slot name="append" />
+                </span> -->
+                <!-- FIN slot append -->
+            </div>
+            <!-- DÉBUT slot menu -->
+            <div class="abo-formfield__menu"></div>
+            <!-- FIN slot menu -->
+            <!-- DÉBUT composant AboControlMessage -->
+            <div
+                id="messageUuid"
+                class="abo-control-message abo-formfield__message"
+            >
+                <p
+                    class="abo-control-message__message abo--error"
+                    aria-live="polite"
+                >
+                    <i class="abo-svg" aria-hidden="true">!</i>
+                    <span class="abo-control-message__error-message"
+                        >Message d'erreur</span
+                    >
+                </p>
+                <p class="abo-control-message__message abo--helper">
+                    <span class="abo-control-message__helper-message"
+                        >Message d'aide</span
+                    >
+                </p>
+            </div>
+            <!-- FIN composant AboControlMessage -->
+        </div>
+        <!-- FIN composant AboFormfield -->
+    </body>
+
+    <script>
+        const AboFormfieldMaxWidth = Object.freeze({
+            FullWidth: 'full-width',
+            Xxl: '2xl',
+            Xl: 'xl',
+            Lg: 'lg',
+            Regular: 'regular',
+            Md: 'md',
+            Sm: 'sm',
+            XS: 'xs',
+            Xxs: '2xs',
+        });
+
+        const AboControlMessage = (props) => {
+            props = {
+                errorMessage: '',
+                helperMessage: '',
+                ...props,
+            };
+
+            const refControlMessage = document.querySelector(
+                '.abo-control-message'
+            );
+
+            const setErrorMessageProp = () => {
+                refControlMessage.querySelector(
+                    '.abo-control-message__error-message'
+                ).innerHTML = props.errorMessage || '';
+
+                refControlMessage.querySelector(
+                    '.abo-control-message__message.abo--error'
+                ).style = !props.errorMessage
+                    ? 'display: none'
+                    : 'display: block';
+            };
+
+            const setHelperMessageProp = () => {
+                refControlMessage.querySelector(
+                    '.abo-control-message__helper-message'
+                ).innerHTML = props.helperMessage || '';
+
+                refControlMessage.querySelector(
+                    '.abo-control-message__message.abo--helper'
+                ).style = !props.helperMessage
+                    ? 'display: none'
+                    : 'display: block';
+            };
+
+            const onUpdate = () => {
+                setErrorMessageProp();
+                setHelperMessageProp();
+            };
+
+            const onMounted = () => {
+                onUpdate();
+            };
+
+            const onUpdateProp = (updatedProps) => {
+                props = {
+                    ...props,
+                    ...updatedProps,
+                };
+
+                onUpdate();
+            };
+
+            const onBeforeUnmount = () => {
+                // TODO
+            };
+
+            const onUnmount = () => {
+                onBeforeUnmount();
+            };
+
+            return {
+                onMounted,
+                onUpdate,
+                onUpdateProp,
+                onBeforeUnmount,
+                onUnmount,
+            };
+        };
+
+        const AboFormfield = (props) => {
+            props = {
+                vModel: '',
+                label: 'Label',
+                labelUp: false,
+                showAsterisk: false,
+                placeholder: '',
+                focus: false,
+                maxWidth: AboFormfieldMaxWidth.Regular,
+                disabled: false,
+                readonly: false,
+                error: false,
+                errorMessage: '',
+                helperMessage: ``,
+                ...props,
+            };
+
+            const controlMessage = AboControlMessage();
+
+            let transitionActive = false;
+
+            const refFormfield = document.querySelector('.abo-formfield');
+            const refInput = refFormfield.querySelector(
+                'input, select, textarea'
+            );
+
+            const setVModel = () => {
+                refInput.value = props.vModel;
+            };
+
+            const setLabelProp = () => {
+                Array.from(
+                    refFormfield.querySelectorAll('.abo-formfield__label-value')
+                ).forEach((ref) => {
+                    ref.innerHTML = props.label || '';
+                });
+                caculerHauteurLabel();
+            };
+
+            const setLabelUpProp = () => {
+                if (
+                    refInput.value ||
+                    props.labelUp ||
+                    (props.focus && !props.disabled) ||
+                    (props.readonly && !props.disabled) ||
+                    props.placeholder
+                ) {
+                    refFormfield.classList.add('abo--label-up');
+                } else {
+                    refFormfield.classList.remove('abo--label-up');
+                }
+            };
+
+            const setShowAsteriskProp = () => {
+                Array.from(
+                    refFormfield.querySelectorAll('.abo-formfield__asterisk')
+                ).forEach((ref) => {
+                    ref.innerHTML = props.showAsterisk ? '&nbsp;*' : '';
+                });
+            };
+
+            const setPlaceholderProp = () => {
+                if (props.placeholder) {
+                    refInput.setAttribute('placeholder', props.placeholder);
+                } else {
+                    refInput.removeAttribute('placeholder');
+                }
+            };
+
+            const setMaxWidthProp = () => {
+                let maxWidth = '0';
+
+                switch (props.maxWidth) {
+                    case AboFormfieldMaxWidth.FullWidth:
+                        maxWidth = '100%';
+                        break;
+                    case AboFormfieldMaxWidth.Xxl:
+                        maxWidth = '616px';
+                        break;
+                    case AboFormfieldMaxWidth.Xl:
+                        maxWidth = '537px';
+                        break;
+                    case AboFormfieldMaxWidth.Lg:
+                        maxWidth = '458px';
+                        break;
+                    case AboFormfieldMaxWidth.Md:
+                        maxWidth = '379px';
+                        break;
+                    case AboFormfieldMaxWidth.Sm:
+                        maxWidth = '221px';
+                        break;
+                    case AboFormfieldMaxWidth.XS:
+                        maxWidth = '142px';
+                        break;
+                    case AboFormfieldMaxWidth.Xxs:
+                        maxWidth = '63px';
+                        break;
+                    default:
+                        maxWidth = '300px';
+                }
+
+                refFormfield.style.setProperty('--max-width', maxWidth);
+            };
+
+            const setFocusProp = () => {
+                if (props.focus && !props.disabled) {
+                    refFormfield.classList.add('abo--focus');
+                } else {
+                    refFormfield.classList.remove('abo--focus');
+                }
+            };
+
+            const setReadonlyProp = () => {
+                if (props.readonly && !props.disabled) {
+                    refFormfield.classList.add('abo--readonly');
+                    refInput.setAttribute('readonly', 'true');
+                } else {
+                    refFormfield.classList.remove('abo--readonly');
+                    refInput.removeAttribute('readonly');
+                }
+            };
+
+            const setDisabledProp = () => {
+                if (props.disabled) {
+                    refFormfield.classList.add('abo--disabled');
+                    refInput.disabled = true;
+                } else {
+                    refFormfield.classList.remove('abo--disabled');
+                    refInput.disabled = false;
+                }
+            };
+
+            const setErrorProp = () => {
+                if ((props.error || props.errorMessage) && !props.disabled) {
+                    refFormfield.classList.add('abo--error');
+                } else {
+                    refFormfield.classList.remove('abo--error');
+                }
+            };
+
+            const setErrorMessageProp = () => {
+                controlMessage.onUpdateProp({
+                    errorMessage: props.errorMessage,
+                });
+
+                refFormfield.querySelector('.abo-formfield__message').style =
+                    !props.errorMessage && !props.helperMessage
+                        ? 'display: none'
+                        : 'display: block';
+            };
+
+            const setHelperMessageProp = () => {
+                controlMessage.onUpdateProp({
+                    helperMessage: props.helperMessage,
+                });
+
+                refFormfield.querySelector('.abo-formfield__message').style =
+                    !props.errorMessage && !props.helperMessage
+                        ? 'display: none'
+                        : 'display: block';
+            };
+
+            const caculerHauteurLabel = () => {
+                const refHiddenLabel = refFormfield.querySelector(
+                    '.abo-formfield__hidden-label'
+                );
+
+                const refHiddenLabelContent = refHiddenLabel.querySelector(
+                    '.abo-formfield__hidden-label-content'
+                );
+
+                const labelContentHeight = parseInt(
+                    getComputedStyle(refHiddenLabelContent).height
+                );
+
+                refFormfield.style.setProperty(
+                    '--field-margin-top',
+                    `${
+                        labelContentHeight / 2 < 12
+                            ? 0
+                            : labelContentHeight / 2 - 4
+                    }px`
+                );
+
+                const labelheight = parseInt(
+                    getComputedStyle(refHiddenLabel).height
+                );
+
+                refFormfield.style.setProperty(
+                    '--field-min-height',
+                    `${labelheight <= 48 ? 48 : labelheight}px`
+                );
+            };
+
+            const resizeObserver = new ResizeObserver((entries) => {
+                caculerHauteurLabel();
+            });
+
+            const updateModel = () => {
+                props.vModel = refInput.value;
+                setLabelUpProp();
+                setErrorProp();
+            };
+
+            const onUpdate = () => {
+                setVModel();
+                setLabelProp();
+                setLabelUpProp();
+                setShowAsteriskProp();
+                setPlaceholderProp();
+                setMaxWidthProp();
+                setFocusProp();
+                setDisabledProp();
+                setReadonlyProp();
+                setErrorProp();
+                setErrorMessageProp();
+                setHelperMessageProp();
+            };
+
+            const onMounted = () => {
+                controlMessage.onMounted();
+
+                onUpdate();
+
+                resizeObserver.observe(refFormfield);
+
+                refInput.addEventListener('input', updateModel);
+
+                requestAnimationFrame(() => {
+                    if (!transitionActive) {
+                        transitionActive = true;
+                        refFormfield.classList.add('abo--transition-active');
+                    }
+                });
+            };
+
+            const onUpdateProp = (updatedProps) => {
+                props = {
+                    ...props,
+                    ...updatedProps,
+                };
+
+                onUpdate();
+            };
+
+            const onBeforeUnmount = () => {
+                controlMessage.onMounted();
+
+                resizeObserver.unobserve(refFormfield);
+                refInput.removeEventListener('input', updateModel);
+            };
+
+            const onUnmount = () => {
+                onBeforeUnmount();
+            };
+
+            return {
+                onMounted,
+                onUpdate,
+                onUpdateProp,
+                onBeforeUnmount,
+                onUnmount,
+            };
+        };
+
+        const formfield = AboFormfield();
+
+        formfield.onMounted();
+
+        formfield.onUpdateProp({
+            vModel: '',
+            label: 'Étiquette très très très très très très très longue',
+            showAsterisk: true,
+            placeholder: '',
+            maxWidth: AboFormfieldMaxWidth.Regular,
+            error: false,
+            readonly: false,
+            disabled: false,
+            errorMessage: '',
+            helperMessage: '',
+        });
+    </script>
+</html>
