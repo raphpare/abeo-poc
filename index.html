@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>POC: squelette page ABEO</title>
+		<meta name="description" content="Squelette d'une page de l'application ABEO">
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<style>
+			:root {
+				--brand-primaire: #0039c9;
+				--brand-secodaire: #002c9b;
+				--brand-bandeau-hauteur: 10px;
+				--brand-bandeau-couleur-fond: #262626;
+				--brand-logo-couleur: #262626;
+				--brand-entete-couleur-fond: #ffffff;
+				--brand-entete-couleur-bordure: #e0e0e0;
+				--brand-bouton-entete-couleur-texte: #5C5C5C;
+				--brand-bouton-entete-couleur-texte-hover: #000000;
+				--brand-bouton-entete-couleur-texte-selected: #000000;
+				--brand-bouton-entete-couleur-fond-hover: #EBEBEB;
+				--brand-bouton-entete-couleur-fond-selected: #CCE0F4;
+				--brand-menu-couleur-fond: #f5f5f5;
+				--brand-lien-menu-couleur-texte: #5c5c5c;
+				--brand-lien-menu-couleur-texte-hover: #000000;
+				--brand-lien-menu-couleur-texte-selected: #000000;
+				--brand-lien-menu-couleur-fond-hover: #ebebeb;
+				--brand-lien-menu-couleur-fond-selected: #cce0f4;
+
+				--abo-space-2xs: 4px;
+				--abo-space-xs: 8px;
+				--abo-space-sm: 12px;
+				--abo-space: 16px;
+				--abo-space-md: 24px;
+				--abo-space-lg: 32px;
+				--abo-space-xl: 40px;
+				--abo-space-2xl: 48px;
+				--abo-space-3xl: 56px;
+				--abo-space-4xl: 64px;
+
+				--abo-border-radius-sm: 4px;
+				--abo-border-radius: 8px;
+
+				--abo-font-weight-light: 300;
+				--abo-font-weight-medium: 500;
+				--abo-font-weight-semi-bold: 600;
+				--abo-font-weight-bold: 700;
+
+				--abo-font-size-xs: 12;
+				--abo-font-size-sm: 14;
+				--abo-font-size: 16;
+				--abo-font-size-md: 18;
+				--abo-font-size-h1: 32;
+				--abo-font-size-h2: 28;
+				--abo-font-size-h3: 24;
+				--abo-font-size-h4: 20;
+
+				--abo-blanc: #fff;
+				--abo-noir: #000;
+				--abo-dark-text: #262626;
+				--abo-light-text: #f5f5f5;
+				--abo-border-color: #e0e0e0;
+				
+				--abo-neutral-5: #f5f5f5;
+				--abo-neutral-10: #EBEBEB;
+				--abo-neutral-75: #404040;
+				--abo-neutral-90: #262626;
+				
+				--abo-page-max-width: 1300px;
+				--abo-hauteur-entete: 70px;
+				--abo-hauteur-barre-outils: 90px;
+
+				--warning: #DB7E00;
+			}
+
+			@media (min-width: 768px) {
+				:root {
+					--abo-font-size-h1: 40;
+					--abo-font-size-h2: 34;
+					--abo-font-size-h3: 28;
+					--abo-font-size-h4: 24;
+
+					--abo-hauteur-entete: 84px;
+				}
+			}
+
+			/******** Reset et classes utilitaires ********/
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				height: 100%;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: "Inter", Arial, sans-serif;
+				color: var(--abo-dark-text);
+				font-size: 1rem;
+				font-weight: var(--abo-font-weight-light);
+			}
+
+			div {
+				margin: 0;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				margin-top: var(--abo-space-lg);
+				margin-bottom: 0;
+				font-weight: var(--abo-font-weight-bold);
+			}
+
+			h1:first-child,
+			h2:first-child,
+			h3:first-child,
+			h4:first-child,
+			h5:first-child,
+			h6:first-child {
+				margin-top: 0;
+			}
+
+			h1 {
+				margin-top: 0;
+				font-size: calc(var(--abo-font-size-h1) / var(--abo-font-size) * 1rem);
+			}
+
+			h2,
+			.abou-h2 {
+				font-size: calc(var(--abo-font-size-h2) / var(--abo-font-size) * 1rem);
+			}
+
+			h3,
+			.abou-h3 {
+				font-size: calc(var(--abo-font-size-h3) / var(--abo-font-size) * 1rem);
+			}
+
+			h3,
+			.abou-h4 {
+				font-size: calc(var(--abo-font-size-h4) / var(--abo-font-size) * 1rem);
+			}
+
+			button,
+			input {
+				font-family: inherit;
+				font-size: inherit;
+			}
+
+			p {
+				margin: var(--abo-space-sm) 0 0;
+			}
+
+			.abou-mt-md {
+				margin-top: var(--abo-space-md);
+			}
+
+			.abou-full-width {
+				width: 100%;
+			}
+
+			/******** abeo-app/commons/components/button ********/
+
+			.abo-button {
+				transition: opacity 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+				position: relative;
+				appearance: none;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 13px var(--abo-space);
+				gap: var(--abo-space-xs);
+				border-width: 1px;
+				border-style: solid;
+				border-radius: var(--abo-border-radius);
+				outline-color: var(--brand-primaire);
+				font-family: inherit;
+				font-weight: var(--abo-font-weight-medium);
+				text-align: center;
+				overflow: hidden;
+			}
+
+			.abo-button::before {
+				transition: opacity 0.3s ease;
+				position: absolute;
+				inset: 0;
+				background-color: var(--brand-primaire);
+				content: '';
+				opacity: 0;
+			}
+
+			.abo-button:not(:disabled) {
+				cursor: pointer;
+			}
+
+			.abo-button.abo--variant-primary,
+			.abo-button.abo--variant-secondary {
+				border-color: var(--brand-primaire);
+			}
+
+			.abo-button.abo--variant-secondary,
+			.abo-button.abo--variant-tertiary {
+				background-color: var(--abo-blanc);
+				color: var(--brand-primaire);
+			}
+
+			.abo-button.abo--variant-primary {
+				background-color: var(--brand-primaire);
+				color: var(--abo-light-text);
+			}
+
+			.abo-button.abo--variant-tertiary {
+				border-color: rgba(255, 255, 255, 0);
+			}
+
+			.abo-button:not(:disabled):focus {
+				background-color: var(--brand-primaire);
+				color: var(--abo-blanc);
+				border-color: var(--brand-primaire);
+				box-shadow: inset 0px 0px 0px 2px var(--abo-blanc);
+			}
+
+			.abo-button:not(:disabled):hover {
+				background-color: var(--abo-blanc);
+				color: var(--brand-primaire);
+				border: 1px solid var(--brand-primaire);
+				box-shadow: inset 0px 0px 0px 1px var(--brand-primaire);
+			}
+
+			.abo-button:not(:disabled):hover::before {
+				opacity: 0.05;
+			}
+
+			.abo-button:not(:disabled):active::before {
+				opacity: 0.16;
+			}
+
+			.abo-button.abo-button:disabled {
+				color: var(--abo-noir);
+				border-color: var(--abo-noir);
+				background-color: rgba(255, 255, 255, 0);
+				opacity: 0.3;
+			}
+
+			.abo-button.abo--variant-tertiary:disabled {
+				border-width: 0;
+			}
+
+			/******** abeo-app/commons/components/link ********/
+
+			.abo-link {
+				--link-color: var(--brand-primaire);
+				--link-hover-color: var(--brand-primaire);
+
+				transition: color 0.3s ease;
+				display: inline-flex;
+				font-family: inherit;
+				font-size: inherit;
+				text-decoration: none;
+				font-weight: var(--abo-font-weight-medium);
+				outline-color: var(--brand-primaire);
+				appearance: none;
+				background: rgba(255. 255, 255, 0);
+				border: none;
+				border-radius: var(--abo-border-radius-sm);
+				color: var(--link-color);
+			}
+
+			.abo-link > :not(:first-child) {
+				margin-left: var(--abo-space-xs);
+			}
+
+			.abo-link.abo--align-item-start {
+				align-items: start;
+			}
+
+			.abo-link.abo--align-item-center {
+				align-items: center;
+			}
+
+			.abo-link.abo--label-full-width {
+				display: flex;
+			}
+
+			.abo-link.abo--label-full-width .abo-link__label {
+				width: 100%;
+				flex: auto;
+			}
+
+			.abo-link.abo--variant-text {
+				--link-color: var(--abo-neutral-75);
+				--link-hover-color: var(--abo-dark-text);
+			}
+
+			.abo-link.abo--disabled,
+			.abo-link[aria-disabled="true"]{
+				color: var(--abo-noir);
+				opacity: .5;
+			}
+
+			.abo-link[href]:hover,
+			.abo-link[tabindex="0"]:hover,
+			.abo-link[href]:focus,
+			.abo-link[tabindex="0"]:focus {
+				color: var(--link-hover-color);
+			}
+
+			.abo-link[href]:hover .abo-link__label,
+			.abo-link[tabindex="0"]:hover .abo-link__label,
+			.abo-link[href]:focus .abo-link__label,
+			.abo-link[tabindex="0"]:focus .abo-link__label {
+				text-decoration: underline;
+			}
+
+			.abo-link__prepend,
+			.abo-link__append {
+				flex-shrink: 0;
+			}
+
+
+			/******** abeo-app/containers/abo-smart-app-root ********/
+
+			.abo-smart-app-root {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+			}
+
+			@media (max-width: 767px) {
+				.abo-smart-app-root:not(.abo--etape-bloquee-outils-hidden) .abo-smart-app-root__pied {
+					padding-bottom: var(--abo-hauteur-barre-outils);
+				}
+			}
+
+			.abo-smart-app-root__entete,
+			.abo-smart-app-root__pied {
+				flex-shrink: 0;
+			}
+
+			.abo-smart-app-root__corps {
+				flex: auto;
+			}
+
+			.abo-smart-app-root__pied {
+				background-color: var(--abo-neutral-90);
+				color: var(--abo-light-text);
+			}
+
+			.abo-smart-app-root__conteneur-pied {
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				gap: var(--abo-space-md);
+				max-width: var(--abo-page-max-width);
+				margin: 0 auto;
+				padding: var(--abo-space-lg) var(--abo-space);
+			}
+
+			@media (min-width: 768px) {
+				.abo-smart-app-root__conteneur-pied {
+					padding: var(--abo-space) var(--abo-space-lg);
+				}
+			}
+
+			.abo-smart-app-root__menu-pied {
+				display: flex;
+				flex-direction: column;
+				gap: var(--abo-space-sm) var(--abo-space-md);
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			@media (min-width: 768px) {
+				.abo-smart-app-root__menu-pied {
+					flex-direction: row;
+					flex-wrap: wrap;
+				}
+			}
+
+			.abo-smart-app-root__lien-pied,
+			.abo-smart-app-root__copyright {
+				font-family: inherit;
+				font-size: calc(var(--abo-font-size-sm) / var(--abo-font-size) * 1rem);
+			}
+
+			.abo-smart-app-root__lien-pied {
+				border-radius: var(--abo-border-radius-sm);
+				margin: calc(var(--abo-space-2xs) * -1) calc(var(--abo-space-xs) * -1);
+				padding: var(--abo-space-2xs) var(--abo-space-xs);
+				outline-color: var(--abo-light-text);
+				font-weight: var(--abo-font-weight-medium);
+				color: var(--abo-light-text);
+				text-decoration: none;
+			}
+
+			.abo-smart-app-root__lien-pied:visited {
+				color: var(--abo-light-text);
+			}
+
+			.abo-smart-app-root__lien-pied:hover,
+			.abo-smart-app-root__lien-pied:focus {
+				color: var(--abo-blanc);
+				text-decoration: underline;
+			}
+
+			@media (max-width: 767px) {
+				.abo-smart-app-root__copyright {
+					align-self: flex-end;
+				}
+			}
+
+			/******** abeo-app/containers/abo-smart-entete-app ********/
+
+			.abo-smart-entete-app__entete {
+				width: 100%;
+				background-color: var(--brand-entete-couleur-fond);
+				border-bottom: 1px solid var(--brand-entete-couleur-bordure);
+			}
+
+			@media (min-width: 768px) {
+				.abo-smart-entete-app.abo--position-fixed {
+					padding-top: calc(
+						var(--abo-hauteur-entete) + var(--brand-bandeau-hauteur)
+					);
+				}
+
+				.abo-smart-entete-app.abo--position-fixed
+					.abo-smart-entete-app__entete {
+					position: fixed;
+					top: 0;
+					z-index: 10;
+				}
+			}
+
+			.abo-smart-entete-app__entete::before {
+				display: block;
+				content: "";
+				width: 100%;
+				height: var(--brand-bandeau-hauteur);
+				background: var(--brand-bandeau-couleur-fond);
+			}
+
+			.abo-smart-entete-app__contenu-entete {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: var(--abo-space-xs);
+				height: var(--abo-hauteur-entete);
+				max-width: var(--abo-page-max-width);
+				margin: 0 auto; 
+				padding: calc(var(--abo-space));
+			}
+
+			@media (min-width: 768px) {
+				.abo-smart-entete-app__contenu-entete {
+					gap: var(--abo-space);
+					padding-right: var(--abo-space-lg);
+					padding-left: var(--abo-space-lg);
+				}
+			}
+
+			.abo-smart-entete-app__contenu-gauche {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				flex: auto;
+			}
+
+			.abo-smart-entete-app__contenu-droit {
+				flex-shrink: 0;
+			}
+
+			.abo-smart-entete-app__logos {
+				display: block;
+				color: var(--brand-logo-couleur);
+				margin: calc(var(--abo-space-xs) * -1);
+				outline-color: var(--brand-primaire);
+				border-radius: var(--abo-border-radius-sm);
+				padding: var(--abo-space-xs);
+			}
+
+			.abo-smart-entete-app__logos svg {
+				max-height: 32px;
+			}
+
+			.abo-smart-entete-app__svg-desktop {
+				display: none;
+			}
+
+			.abo-smart-entete-app__svg-mobile {
+				display: block;
+			}
+
+			@media (min-width: 768px) {
+				.abo-smart-entete-app__svg-desktop {
+					display: block;
+
+				}
+
+				.abo-smart-entete-app__svg-mobile {
+					display: none;
+				}
+			}
+
+			.abo-smart-entete-app__liste-meta-navigation {
+				display: flex;
+				align-items: center;
+				margin: 0;
+				padding: 0;
+				list-style-type: none;
+			}
+
+			.abo-smart-entete-app__liste-meta-navigation > :not(:first-child) {
+				margin-left: var(--abo-space);
+			}
+
+			.abo-smart-entete-app__liste-meta-navigation > :not(:first-child):last-child {
+				margin-left: var(--abo-space-md);
+			}
+
+			@media (max-width: 767px) {
+				.abo-smart-entete-app__item-meta-navigation.abo--hidden-version-mobile {
+					display: none;
+				}
+			}
+
+			/******** abeo-app/components/abo-bouton-icone-entete-app ********/
+
+			.abo-bouton-icone-entete-app {
+				transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				outline-color: var(--brand-primaire);
+				border: 1px solid rgba(255, 255,255, 0);
+				border-radius: var(--abo-border-radius);
+				padding: var(--abo-space-xs) var(--abo-space-sm);
+				background: rgba(255, 255,255, 0);
+				font-family: inherit;
+				font-size: inherit;
+				color: var(--brand-bouton-entete-couleur-texte);
+				appearance: none;
+			}
+
+			.abo-bouton-icone-entete-app:not(:disabled) {
+				cursor: pointer;
+			}
+
+			.abo-bouton-icone-entete-app:not(:disabled):not(:active):hover,
+			.abo-bouton-icone-entete-app:not(:disabled):not(:active):focus {
+				color: var(--brand-bouton-entete-couleur-texte-hover);
+				background: var(--brand-bouton-entete-couleur-fond-hover);
+			}
+
+			.abo-bouton-icone-entete-app:not(:disabled).abo--selected.abo--selected {
+				color: var(--brand-bouton-entete-couleur-texte-selected);
+				background: var(--brand-bouton-entete-couleur-fond-selected);
+			}
+
+			.abo-bouton-icone-entete-app svg {
+				width: 26px;
+				height: 26px;
+			}
+
+			/******** abeo-app/components/abo-bouton-compte-entete-app ********/
+
+			.abo-bouton-compte-entete-app {
+				transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				padding: var(--abo-space-xs) var(--abo-space-sm);
+				outline-color: var(--brand-primaire);
+				border: 1px solid currentColor;
+				border-radius: var(--abo-border-radius);
+				background: rgba(255, 255,255, 0);
+				font-family: inherit;
+				font-size: inherit;
+				color: var(--brand-bouton-entete-couleur-texte);
+				appearance: none;
+			}
+
+			.abo-bouton-compte-entete-app > :not(:last-child) {
+				margin-right: var(--abo-space-sm);
+			}
+
+
+			.abo-bouton-compte-entete-app:not(:disabled) {
+				cursor: pointer;
+			}
+
+			.abo-bouton-compte-entete-app:not(:disabled):not(:active):hover,
+			.abo-bouton-compte-entete-app:not(:disabled):not(:active):focus {
+				color: var(--brand-bouton-entete-couleur-texte-hover);
+				background: var(--brand-bouton-entete-couleur-fond-hover);
+			}
+
+			.abo-bouton-compte-entete-app:not(:disabled).abo--selected.abo--selected {
+				color: var(--brand-bouton-entete-couleur-texte-selected);
+				background: var(--brand-bouton-entete-couleur-fond-selected);
+			}
+
+			.abo-bouton-compte-entete-app svg {
+				width: 26px;
+				height: 26px;
+			}
+
+			/******** abeo-app/components/abo-lien-aller-contenu ********/
+
+			.abo-lien-aller-contenu {
+				transition: top 0.3s ease, opacity 0.3s ease;
+				position: fixed;
+				top:  var(--brand-bandeau-hauteur);
+				left: 50%;
+				z-index: 20;
+				display: inline-block;
+				min-width: 224px;
+				max-width: 100vw;
+				transform: translate3d(-50%, -50%, 0);
+				opacity: 0;
+				outline-color: var(--brand-primaire);
+				border: 1px solid var(--brand-primaire);
+				border-radius: var(--abo-border-radius-sm);
+				padding: var(--abo-space-xs) var(--abo-space-sm);
+				background-color: var(--abo-blanc);
+				color: var(--brand-primaire);
+				font-weight: var(--abo-font-weight-medium);
+				text-decoration: none;
+				text-align: center;
+				overflow: hidden;
+			}
+
+			.abo-lien-aller-contenu::before {
+				position: absolute;
+				inset: 0;
+				content: '';
+				background-color: var(--brand-primaire);
+				opacity: 0.05;
+			 }
+
+
+			.abo-lien-aller-contenu:focus {
+				top: calc(var(--brand-bandeau-hauteur) + var(--abo-hauteur-entete) / 2);
+				opacity: 1;
+			}
+
+			@media (min-width: 768px) {
+				.abo-lien-aller-contenu {
+					min-width: auto;
+				}
+			}
+
+			/******** abeo-app/components/abo-menu-principal ********/
+
+			.abo-menu-principal {
+				background-color: var(--brand-menu-couleur-fond);
+				border-bottom: 1px solid var(--brand-entete-couleur-bordure);
+				outline-color: var(--brand-primaire);
+			}
+
+			@media (max-width: 767px) {
+				.abo-menu-principal {
+					display: none;
+				}
+			}
+
+			.abo-menu-principal__liste {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				max-width: var(--abo-page-max-width);
+				margin: 0 auto;
+				padding: var(--abo-space) var(--abo-space-md);
+				list-style-type: none;
+			}
+
+			.abo-menu-principal__liste > :not(:last-child) {
+				margin-right: var(--abo-space);
+			}
+
+			.abo-menu-principal__lien {
+				transition: background 0.3s ease, color 0.3s ease;
+				display: flex;
+				align-items: center;
+				outline-color: var(--brand-primaire);
+				border-radius: var(--abo-border-radius);
+				padding: var(--abo-space-xs) var(--abo-space-sm);
+				background: rgba(255, 255, 255, 0);
+				color: var(--brand-lien-menu-couleur-texte);
+				text-decoration: none;
+				font-weight: var(--abo-font-weight-medium);
+				font-size: calc(var(--abo-font-size-md) / var(--abo-font-size) * 1rem);
+			}
+
+			.abo-menu-principal__lien:not(:active):hover,
+			.abo-menu-principal__lien:not(:active):focus {
+				color: var(--brand-lien-menu-couleur-texte-hover);
+				background: var(--brand-lien-menu-couleur-fond-hover);
+			}
+
+			.abo-menu-principal__lien.abo-menu-principal__lien[aria-current="page"] {
+				color: var(--brand-lien-menu-couleur-texte-selected);
+				background: var(--brand-lien-menu-couleur-fond-selected);
+			}
+
+			.abo-menu-principal__icone {
+				font-size: 20px;
+				margin-right: var(--abo-space-xs);
+			}
+
+			/******** abeo-app/components/abo-barre-outils ********/
+
+			.abo-barre-outils {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: 9;
+				width: 100%;
+				height: var(--abo-hauteur-barre-outils);
+				background-color: var(--abo-blanc);
+				border-top: 1px solid var(--abo-border-color);
+				padding: var(--abo-space) 0 var(--abo-space-md);
+				outline-color: var(--brand-primaire);
+			}
+
+			@media (min-width: 375px) {
+				.abo-barre-outils {
+					padding-left: var(--abo-space);
+					padding-right: var(--abo-space);
+				}
+			}
+
+			.abo-barre-outils.abo--hidden {
+				display: none;
+			}
+
+			@media (min-width: 768px) {
+				.abo-barre-outils {
+					display: none;
+				}
+			}
+
+			.abo-barre-outils__liste {
+				display: flex;
+				justify-content: space-between;
+				margin: 0 auto;
+				padding: 0;
+				list-style-type: none;
+			}
+
+			.abo-barre-outils__lien {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				gap: 2px;
+				width: calc(56px + var(--abo-space-xs) * 2);
+				height: calc(50px + var(--abo-space-xs) * 2);
+				margin: calc(var(--abo-space-xs) * -1);
+				padding: var(--abo-space-md);
+				color: var(--abo-neutral-75);
+				border-radius: var(--abo-border-radius-sm);
+				text-decoration: none;
+				outline-color: var(--brand-primaire);
+			}
+
+			.abo-barre-outils__lien:hover {
+				color: var(--abo-noir);
+			}
+
+			.abo-barre-outils__lien[aria-current="page"] {
+				color: var(--brand-primaire);
+			}
+
+			.abo-barre-outils__icone {
+				font-size: 26px;
+			}
+			
+			.abo-barre-outils__etiquette {
+				font-size: calc(10 / var(--abo-font-size) * 1rem);
+				font-weight: var(--abo-font-weight-medium);
+				text-align: center;
+    			width: 78px;
+			}
+
+			@media (min-width: 375px) {
+				.abo-barre-outils__etiquette {
+					font-size: calc(var(--abo-font-size-xs) / var(--abo-font-size) * 1rem);
+				}
+			}
+
+
+			/******** abeo-app/components/abo-gabarit-page ********/
+
+			.abo-gabarit-page {
+				display: flex;
+				flex-direction: column;
+				outline-color: var(--brand-primaire);
+				outline: none;
+			}
+
+			.abo-gabarit-page__entete {
+				flex-shrink: 0;
+				width: 100%;
+				background-color: var(--abo-neutral-5);
+			}
+
+			.abo-gabarit-page__contenu-entete {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				max-width: var(--abo-page-max-width);
+				margin: 0 auto;
+				padding: var(--abo-space-2xl) var(--abo-space);
+			}
+
+			.abo-gabarit-page__contenu-entete > :not(:first-child) {
+				margin-left: var(--abo-space-xs);
+			}
+
+			@media (min-width: 768px) {
+				.abo-gabarit-page__contenu-entete {
+					min-height: calc(var(--abo-space-xs) * 25);
+					padding: var(--abo-space-3xl) var(--abo-space-lg);
+				}
+
+				.abo-gabarit-page__contenu-entete > :not(:first-child) {
+					margin-left: var(--abo-space);
+				}
+			}
+
+			.abo-gabarit-page__contenu-gauche-entete {
+				flex: auto;
+			}
+
+			.abo-gabarit-page__contenu-droit-entete {
+				flex-shrink: 0;
+			}
+
+			.abo-gabarit-page__zone-titre > :not(:first-child) {
+				margin-top: var(--abo-space-2xs);
+			}
+
+			.abo-gabarit-page__titre {
+				font-size: calc(var(--abo-font-size-h2) / var(--abo-font-size) * 1rem);
+			}
+
+			.abo-gabarit-page__corps {
+				flex: auto;
+				width: 100%;
+				max-width: var(--abo-page-max-width);
+				margin: 0 auto;
+				padding: var(--abo-space-xl) var(--abo-space) var(--abo-space-2xl);
+			}
+
+			@media (max-width: 767px) {
+				.abo-gabarit-page__corps.abo--no-padding-mobile {
+					padding: 0;
+				}
+			}
+
+			@media (min-width: 768px) {
+				.abo-gabarit-page__corps {
+					padding: var(--abo-space-3xl) var(--abo-space-lg) calc(var(--abo-space-4xl) + var(--abo-space));
+				}
+			}
+
+			/******** abeo-app/components/abo-menu-secondaire ********/
+
+			.abo-menu-secondaire {
+				position: relative;		
+				border-bottom: 1px solid var(--abo-border-color);
+				max-width: 100%;
+				
+			}
+
+			.abo-menu-secondaire__degrade,
+			.abo-menu-secondaire__nav {
+				max-width: var(--abo-page-max-width);
+				margin: 0 auto -1px;
+			}
+
+			.abo-menu-secondaire__degrade {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 1px;
+				left: 0;
+				background: none;
+				pointer-events: none;
+			}
+
+			.abo-menu-secondaire__degrade::before,
+			.abo-menu-secondaire__degrade::after {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				content: '';
+				width: calc(var(--abo-space) + 4px);
+				background-color: var(--abo-neutral-5);
+			}
+
+			.abo-menu-secondaire__degrade::before {
+				left: 0;
+				background: linear-gradient(90deg, var(--abo-neutral-5) 10%, rgba(255, 255, 255, 0) 100%);
+			}
+
+			.abo-menu-secondaire__degrade::after {
+				right: 0;
+				width: var(--abo-space-3xl);
+				background: linear-gradient(-90deg, var(--abo-neutral-5) 10%, rgba(255, 255, 255, 0) 100%);
+			}
+
+			@media (min-width: 768px) {
+				.abo-menu-secondaire__degrade::before {
+					width: calc(var(--abo-space-lg) + 4px);
+				}
+			}
+
+
+			.abo-menu-secondaire__nav {
+				overflow: auto hidden;
+				white-space: nowrap;
+				-webkit-overflow-scrolling: touch;
+  				-ms-overflow-style: -ms-autohiding-scrollbar; 
+				padding: 0 var(--abo-space);
+			}
+
+			.abo-menu-secondaire__nav::-webkit-scrollbar {
+				display: none;
+			}
+
+			@media (min-width: 768px) {
+				.abo-menu-secondaire__nav {
+					padding-right: var(--abo-space-lg);
+					padding-left: var(--abo-space-lg);
+				}
+			}
+
+			.abo-menu-secondaire__liste {
+				display: flex;
+        		align-items: flex-end;
+				list-style-type: none;
+				padding: 0 var(--abo-space-lg) 0 0;
+				margin: 0;
+				
+			}
+
+			.abo-menu-secondaire__liste > :not(:last-child) {
+				margin-right: var(--abo-space-md);
+			}
+
+			@media (min-width: 768px) {
+				.abo-menu-secondaire__liste > :not(:last-child) {
+					margin-right: var(--abo-space-lg);
+				}
+			}
+
+			.abo-menu-secondaire__lien {
+				transition: color 0.3s ease, border-color 0.3s ease;
+				display: flex;
+				padding-bottom: calc(var(--abo-space-md) - var(--abo-space-xs) - var(--abo-space-2xs) );
+				color: var(--abo-neutral-75);
+				text-decoration: none;
+				border: none;
+				border-bottom: var(--abo-space-2xs) solid rgba(255, 255, 255, 0);
+				font-weight: var(--abo-font-weight-medium);
+				outline-color: var(--brand-primaire);
+			}
+
+			.abo-menu-secondaire__liste > :last-child .abo-menu-secondaire__lien {
+				margin-right: var(--abo-space-3xl);
+			}
+
+			@media (min-width: 768px) {
+				.abo-menu-secondaire__lien {
+					padding-bottom: calc(var(--abo-space-md) - var(--abo-space-xs));
+				}
+			}
+
+
+			@media (max-width: 767px) {
+				.abo-menu-secondaire__liste {
+					font-size: calc(var(--abo-font-size-sm) / var(--abo-font-size) * 1rem);
+				}
+			}
+
+			.abo-menu-secondaire__lien:not(:active):hover,
+			.abo-menu-secondaire__lien:not(:active):focus {
+				color: var(--abo-noir);
+				border-color: var(--abo-border-color);
+			}
+
+			.abo-menu-secondaire__lien.abo-menu-secondaire__lien[aria-current="page"] {
+				color: var(--abo-noir);
+				border-color: var(--brand-secodaire);
+			}
+
+			/******** abeo-app/sejours/containers/abo-smart-etapes-sejour ********/
+
+			.abo-smart-etapes-sejour {
+				display: flex;
+				align-items: flex-start;
+			}
+
+			.abo-smart-etapes-sejour__colonne {
+				display: none;
+				flex-shrink: 0;
+			}
+
+			@media (min-width: 768px) {
+				.abo-smart-etapes-sejour__colonne {
+					position: sticky;
+					top: 0;
+					flex-shrink: 0;
+					display: block;
+					width: 100%;
+					max-width: 230px;
+					max-height: 100vh;
+					max-height: 100dvh;
+					margin-top: calc(var(--abo-space-lg) * -1);
+					margin-right: var(--abo-space);
+					padding: var(--abo-space-lg) 0 var(--abo-space-md);
+					overflow-y: auto;
+				}
+			}
+
+			@media (min-width: 1080px) {
+				.abo-smart-etapes-sejour__colonne {
+					max-width: 320px;
+					margin-right: var(--abo-space-lg);
+				}
+			}
+
+			.abo-smart-etapes-sejour__etape-courante {
+				flex: auto;
+			}
+
+			/******** abeo-app/sejours/components/abo-barre-etapes-sejour ********/
+
+			.abo-barre-etapes-sejour {
+				margin-left: 2px;
+			}
+
+			.abo-barre-etapes-sejour__liste {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			.abo-barre-etapes-sejour__etape {
+				position: relative;
+			}
+
+			.abo-barre-etapes-sejour__etape:not(:last-child) .abo-barre-etapes-sejour__lien {
+				padding-bottom: var(--abo-space);
+			}
+
+			.abo-barre-etapes-sejour__etape:not(:last-child) .abo-barre-etapes-sejour__lien::before {
+				bottom: calc(var(--abo-space-2xs));
+			}
+
+			.abo-barre-etapes-sejour__etape::before {
+				transition: width 0.3s ease, height 0.3s ease, left 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+				position: absolute;
+				top: calc(var(--abo-space-xs) + (var(--abo-space-xs) / 2));
+				left: 0;
+				z-index: 1;
+				content: '';
+				width: 4px;
+				height: 4px;
+				border-radius: 50%;
+				border: 2px solid var(--abo-blanc);
+				background-color: var(--brand-primaire);
+			}
+
+			.abo-barre-etapes-sejour__etape.abo--etape-bloquee::before {
+				border-color: var(--abo-blanc);
+				background-color: var(--abo-border-color);
+			}
+
+			.abo-barre-etapes-sejour__etape:not(.abo--etape-bloquee):focus-within::before,
+			.abo-barre-etapes-sejour__etape:not(.abo--etape-bloquee):hover::before {
+				border-color: var(--brand-primaire);
+				background-color: var(--abo-blanc);
+			}
+
+			.abo-barre-etapes-sejour__etape.abo--current-step::before {
+				left: -1px;
+				width: 6px;
+				height: 6px;
+				border-color: var(--brand-primaire);
+				background-color: var(--abo-blanc);
+			}
+
+			.abo-barre-etapes-sejour__etape::after {
+				position: absolute;
+				top: calc(var(--abo-space-xs) + (var(--abo-space-xs) / 2));
+				bottom: calc((var(--abo-space-xs) + (var(--abo-space-xs) / 2)) * -1);
+				left:  var(--abo-space-2xs);
+				z-index: 0;
+				width: 2px;
+				background-color: var(--brand-primaire);
+				transform: translateX(-50%);
+			}
+
+			.abo-barre-etapes-sejour__etape:not(:last-child)::after {
+				content: '';
+			}
+
+			.abo-barre-etapes-sejour__etape.abo--prochaine-etape-barre::after,
+			.abo-barre-etapes-sejour__etape.abo--etape-bloquee::after {
+				background-color: var(--abo-border-color);
+			}
+
+			.abo-barre-etapes-sejour__etape.abo--etape-bloquee .abo-barre-etapes-sejour__lien {
+				position: relative;
+				color: var(--abo-noir);
+				opacity: 0.5;
+			}
+
+			.abo-barre-etapes-sejour__lien {
+				transition: padding-left 0.3s ease, color 0.3s ease;
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				outline-color: var(--brand-primaire);
+				padding: var(--abo-space-xs) var(--abo-space-sm) var(--abo-space-xs) var(--abo-space);
+				margin-left: var(--abo-space-2xs);
+				text-decoration: none;
+				color: inherit;
+			}
+
+			.abo-barre-etapes-sejour__lien::before {
+				transition: opacity 0.3s ease;
+				position: absolute;
+				z-index: -1;
+				inset: 0;
+				content: '';
+				background-color: var(--brand-primaire);
+				border-radius: var(--abo-border-radius-sm);
+				opacity: 0;
+			}
+
+			a.abo-barre-etapes-sejour__lien {
+				cursor: pointer;
+			}
+
+			a.abo-barre-etapes-sejour__lien:not([aria-current="step"]):not(:active):hover,
+			a.abo-barre-etapes-sejour__lien:not([aria-current="step"]):not(:active):focus {
+				padding-left: calc(var(--abo-space) + var(--abo-space-2xs));
+				color: var(--brand-primaire);
+			}
+
+			.abo-barre-etapes-sejour__lien[aria-current="step"] {
+				color: var(--brand-primaire)
+			}
+
+			.abo-barre-etapes-sejour__lien[aria-current="step"]::before {
+				opacity: 0.05;
+			}
+
+			.abo-barre-etapes-sejour__numero-etape {
+				font-size: calc(var(--abo-font-size-xs) / var(--abo-font-size) * 1rem);
+				font-weight: var(--abo-font-weight-light);
+			}
+
+			.abo-barre-etapes-sejour__nom-etape {
+				display: block;
+				margin-top: 2px;
+				font-weight: var(--abo-font-weight-medium);
+			}
+
+			.abo-barre-etapes-sejour__contenu-droit {
+				flex-shrink: 0;
+			}
+
+			.abo-barre-etapes-sejour__icone.abo--etape-incomplete {
+				color: var(--warning);
+			}
+
+			/******** abeo-app/sejours/components/abo-boite-etape-sejour ********/
+
+			.abo-boite-etape-sejour {
+				flex: auto;
+				outline: none;
+			}
+
+			@media (min-width: 768px) {
+				.abo-boite-etape-sejour {
+					border: 1px solid var(--abo-border-color);
+					border-radius: var(--abo-border-radius);
+				}
+			}
+
+			.abo-boite-etape-sejour__entete-accordeon,
+			.abo-boite-etape-sejour__contenu-accordeon,
+			.abo-boite-etape-sejour__corps {
+				padding-right: var(--abo-space);
+				padding-left: var(--abo-space);
+			}
+
+			@media (min-width: 768px) {
+				.abo-boite-etape-sejour__entete-accordeon,
+				.abo-boite-etape-sejour__corps {
+					padding-right: var(--abo-space-lg);
+					padding-left: var(--abo-space-lg);
+				}
+			}
+
+			.abo-boite-etape-sejour__entete {
+				position: sticky;
+				top: -1px;
+				z-index: 1;
+				border-bottom: 1px solid var(--abo-border-color);
+			}
+
+			
+			@media (min-width: 768px) {
+				.abo-boite-etape-sejour__entete {
+					position: relative;
+					top: unset;
+				}
+			}
+
+			.abo-boite-etape-sejour__entete-accordeon {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: var(--abo-space-sm);
+				padding-top: var(--abo-space-md);
+				padding-bottom: var(--abo-space-md);
+				background-color: var(--abo-blanc);
+				outline-color: var(--brand-primaire);
+			}
+
+			@media (max-width: 767px) {
+				.abo-boite-etape-sejour__entete-accordeon {
+					cursor: pointer;
+				}
+			}
+
+			@media (min-width: 768px) {
+				.abo-boite-etape-sejour__entete-accordeon {
+					border-radius: var(--abo-border-radius) var(--abo-border-radius) 0 0;
+				}
+			}
+
+			.abo-boite-etape-sejour__contenu-entete {
+				display: flex;
+				flex: auto;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: var(--abo-space-xs) var(--abo-space-sm);
+			}
+
+			.abo-boite-etape-sejour__titre {
+				flex: auto;
+			}
+
+			.abo-boite-etape-sejour__contenu-gauche-entete {
+				flex-shrink: 0;
+			}
+			
+			@media (min-width: 768px) {
+				.abo-boite-etape-sejour__icone-accordeon {
+					display: none;
+				}
+			}
+
+			.abo-boite-etape-sejour__surtitre {
+				display: block;
+				font-weight: var(--abo-font-weight-light);
+				font-size: calc(var(--abo-font-size-sm) / var(--abo-font-size) * 1rem);
+				margin-bottom: 2px;
+			}
+
+			.abo-boite-etape-sejour__corps-accordeon {
+				height: 0;
+				overflow: hidden;
+				background-color: var(--abo-blanc);
+			}
+
+			.abo-boite-etape-sejour__entete.abo--accordeon-ouvert .abo-boite-etape-sejour__corps-accordeon {
+				height: auto;
+			}
+
+			@media (min-width: 768px) {
+				.abo-boite-etape-sejour__corps-accordeon {
+					display: none;
+				}
+			}
+
+			.abo-boite-etape-sejour__contenu-accordeon {
+				padding-bottom: var(--abo-space-md);
+				overflow-y: auto;
+			}
+
+			@media (min-height: 500px) {
+				.abo-boite-etape-sejour__contenu-accordeon {
+					max-height: calc(100vh - 160px);
+					max-height: calc(100dvh - 160px);
+				}
+			}
+
+			.abo-boite-etape-sejour__corps {
+				padding-top: var(--abo-space-lg);
+				padding-bottom: var(--abo-space-2xl);
+			}
+
+			.abo-boite-etape-sejour__corps > :first-child {
+				margin-top: 0;
+			}
+
+			.abo-boite-etape-sejour__pied {
+				display: flex;
+				display: grid;
+				grid-template-columns: 1fr 117px;
+				border-top: 1px solid var(--abo-border-color);
+				border-radius: 0 0 var(--abo-border-radius) var(--abo-border-radius);
+				background-color: var(--abo-blanc);
+			}
+
+			@media (min-width: 768px) {
+				.abo-boite-etape-sejour__pied {
+					transition: bottom 0.3s ease;
+					position: sticky;
+					bottom: -100px;
+					z-index: 0;
+					grid-template-columns: 1fr 133px;
+				}
+
+				.abo-boite-etape-sejour__pied.abo--position-sticky {
+					bottom: 0;
+				}
+			}
+
+			.abo-boite-etape-sejour__actions-principales {
+				display: flex;
+				align-items: center;
+				gap: var(--abo-space-sm);
+				padding: var(--abo-space) var(--abo-space) var(--abo-space) var(--abo-space-xs);
+			}
+
+			@media (min-width: 768px) {
+				.abo-boite-etape-sejour__actions-principales {
+					padding-right: var(--abo-space);
+				}
+			}
+
+			.abo-boite-etape-sejour__actions-secondaires {
+				position: relative;
+				border-left: 1px solid var(--abo-border-color);
+				height: 100%;
+				overflow: hidden;
+			}
+
+			.abo-boite-etape-sejour__bouton-enregistrer {
+				position: absolute;
+				inset: calc(var(--abo-space-2xs) * -1);
+				width: calc(100% + var(--abo-space-xs))
+			}
+		</style>
+
+		<style>
+			/* Thème ulaval */
+			body[data-abo-theme="ulaval"] {
+				--brand-primaire: rgb(9, 108, 220);
+				--brand-secodaire: #FFC103;
+				--brand-bandeau-hauteur: 8px;
+				--brand-bandeau-couleur-fond: linear-gradient(90deg, #E30513 80%, #FFC103 80%);
+				--brand-bouton-entete-couleur-fond-selected: rgba(9, 108, 220, .2);
+				--brand-menu-couleur-fond: #3D3D3D;
+				--brand-lien-menu-couleur-texte: #D7D7D7;
+				--brand-lien-menu-couleur-texte-hover: #F9F9F9;
+				--brand-lien-menu-couleur-texte-selected: #F9F9F9;
+				--brand-lien-menu-couleur-fond-hover: rgba(0, 0, 0, 0.2);
+				--brand-lien-menu-couleur-fond-selected: rgba(0, 0, 0, 0.5);
+			}
+
+			/* Thème udem */
+			body[data-abo-theme="udem"] {
+				--brand-primaire: #0039c9;
+				--brand-secodaire: #0B113A;
+				--brand-bandeau-hauteur: 0px;
+				--brand-bandeau-couleur-fond: #fff;
+				--brand-bouton-entete-couleur-fond-selected: #E5F0F8;
+				--brand-menu-couleur-fond: #E5F0F8;
+				--brand-lien-menu-couleur-texte: #5C5C5C;
+				--brand-lien-menu-couleur-texte-hover: #000;
+				--brand-lien-menu-couleur-texte-selected: #FFFFFF;
+				--brand-lien-menu-couleur-fond-hover: rgba(0, 0, 0, 0.05);
+				--brand-lien-menu-couleur-fond-selected: #0B113A;
+			} 
+
+			/* Thème udes */
+			body[data-abo-theme="udes"] {
+				--brand-primaire: #096E3F;
+				--brand-secodaire: #096E3F;
+				--brand-bandeau-hauteur: 18px;
+				--brand-bandeau-couleur-fond: #018849;
+				--brand-bouton-entete-couleur-fond-selected: rgba(9, 110, 63, .2);
+				--brand-lien-menu-couleur-texte-selected: #fff;
+				--brand-lien-menu-couleur-fond-selected: #096E3F;
+			} 
+
+			/* Thème cegeplimoilou */
+			body[data-abo-theme="cegeplimoilou"] {
+				--brand-primaire: #15428f;
+				--brand-secodaire: #009892;
+				--brand-logo-couleur: #fff;
+				--brand-bandeau-hauteur: 0px;
+				--brand-bandeau-couleur-fond: rgba(255, 255, 255, 0);
+				--brand-entete-couleur-fond: #15428f;
+				--brand-entete-couleur-bordure: #15428f;
+				--brand-bouton-entete-couleur-texte: #dfe2fd;
+				--brand-bouton-entete-couleur-texte-hover: #fff;
+				--brand-bouton-entete-couleur-texte-selected: #000;
+				--brand-bouton-entete-couleur-fond-hover: #0f387d;
+				--brand-bouton-entete-couleur-fond-selected: #009892;
+				--brand-menu-couleur-fond: #0f387d;
+				--brand-lien-menu-couleur-texte: #dfe2fd;
+				--brand-lien-menu-couleur-texte-hover: #fff;
+				--brand-lien-menu-couleur-texte-selected: #000;
+				--brand-lien-menu-couleur-fond-hover: #15428f;
+				--brand-lien-menu-couleur-fond-selected: #009892;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- DÉBUT du composant <abo-lien-aller-contenu /> -->
+		<a class="abo-lien-aller-contenu" data-go-to="contenu" href="#">
+			Aller au contenu principal
+		</a>
+		<!-- FIN du composant <abo-lien-aller-contenu /> -->
+		<!-- DÉBUT du composant <abo-lien-aller-contenu /> -->
+		<a class="abo-lien-aller-contenu"  data-go-to="menu" href="#">
+			Aller au menu principal
+		</a>
+		<!-- FIN du composant <abo-lien-aller-contenu /> -->
+		
+		<!-- DÉBUT du composant <abo-smart-app-root /> 
+			* Retirer la classe .abo--etape-bloquee-outils-hidden pour laisser de l'espace pour afficher le composant <abo-barre-outils />
+		-->
+		<div class="abo-smart-app-root abo--etape-bloquee-outils-hidden">
+			<!-- DÉBUT du composant <abo-smart-entete-app />
+
+				 * Ajouter la classe .abo--position-fixed pour rendre l'entête fixe
+			-->
+			<header
+				class="abo-smart-app-root__entete abo-smart-entete-app"
+			>
+				<div class="abo-smart-entete-app__entete">
+					<div class="abo-smart-entete-app__contenu-entete">
+						<div class="abo-smart-entete-app__contenu-gauche">
+							<a class="abo-smart-entete-app__logos" href="#" >
+								<svg
+									class="abo-smart-entete-app__svg-desktop"
+									role="img"
+									aria-label="Logo ABEO"
+									width="140px"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 1154.8 262.6"
+								>
+									<path fill="currentColor" d="M119.6,262.6v-96.2c0-14.1-9.3-24.1-24.4-24.1H0v23h80.8l-61.2,60.1l16.5,15.8l60.1-60.1v81.5H119.6z M1067.1,212.4c-23,0-43-18.6-43-41.9V91.8c0-23,18.9-41.6,43-41.6c23.7,0,43,18.6,43,42.6v77.7C1110.1,193.8,1089.8,212.4,1067.1,212.4zM769.8,11v240.6h173.2v-43.6H814.5v-62.2h85.9v-44.3h-85.9V54.6H941V11H769.8z M599.4,99.3V55.7h51.6c12,0,20.6,8.9,20.6,21s-8.6,22.7-20.6,22.7H599.4z M555.7,251.6H652c42.6,0,77-33.7,77-76.6c0-22.7-11-43.3-27.8-59.5c8.9-11,15.8-24.7,15.8-39.9c0-36.4-29.6-64.6-65-64.6h-96.2V251.6z M599.4,207.9v-67.7h51.6c18.6,0,34,15.5,34,33.7c0,18.9-15.5,34-34,34H599.4z M404.5,164.3l23-84.5l24.1,84.5H404.5z M343.7,251.6H387v-21l6.9-23.7H464l6.5,23.7v21h43.3v-21l-6.5-23.7l-13.4-44.7L448.5,11h-41.6l-56.4,195.9l-6.9,23.7V251.6z M178.7,83.2l37.1-51.6l-17.2-13.1l-38.5,51.6L178.7,83.2z M197.3,120.6l60.1-19.9l-6.5-22l-61.2,19.6L197.3,120.6z M119.6,63.2h21.7V0h-21.7V63.2z M81.8,83.2L101,70.1L62.5,18.6L45,31.6L81.8,83.2z M142.3,262.6h23.4v-81.5l60.1,60.1l16.5-15.8l-61.2-60.1h80.8v-23h-95.2c-15.1,0-24.4,10-24.4,24.1V262.6z M63.6,120.6l6.2-22.3L10,78.7l-6.5,22L63.6,120.6z M1067.1,257.1c48.5,0,87.6-38.1,87.6-86.6V91.8c0-47.1-39.2-86.3-87.6-86.3c-47.4,0-86.3,39.2-86.3,86.3v78.7C980.9,218.9,1019.7,257.1,1067.1,257.1z"/>
+								</svg>
+								<svg
+									class="abo-smart-entete-app__svg-mobile"
+									role="img"
+									aria-label="Logo ABEO"
+									width="32px"
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 982.1 984.7"
+								>
+									<g fill="currentColor">
+										<path d="M448.5,984.7V623.8c0-52.8-34.8-90.2-91.5-90.2H0V620h302.9L73.5,845.5l61.9,59.3l225.6-225.6v305.5H448.5z"/>
+										<polygon points="670.2,311.9 809.4,118.6 745,69.6 600.6,262.9"/>
+										<polygon points="739.8,452.4 965.4,377.6 940.9,295.2 711.5,368.6"/>
+										<rect x="448.5" width="81.2" height="237.2"/>
+										<polygon points="306.8,311.9 378.9,262.9 234.6,69.6 168.8,118.6"/>
+										<path d="M533.6,984.7h87.6V679.2l225.6,225.6l61.9-59.3L679.2,620h302.9v-86.4h-357c-56.7,0-91.5,37.4-91.5,90.2V984.7z"/>
+										<polygon points="238.4,452.4 261.6,368.6 37.4,295.2 12.9,377.6 	"/>
+									</g>
+								</svg>
+							</a>
+						</div>
+						<div class="abo-smart-entete-app__contenu-droit">
+							<nav class="abo-smart-entete-app__meta-navigation">
+								<ul
+									class="abo-smart-entete-app__liste-meta-navigation"
+									aria-label="Meta navigation"
+								>
+									<li class="abo-smart-entete-app__item-meta-navigation">
+										<!-- DÉBUT du composant <abo-bouton-icone-entete-app /> 
+											* État selected: Ajouter la classe CSS ".abo--selected" sur le button.abo-bouton-icon-entete-app
+										-->
+										<button class="abo-bouton-icone-entete-app" title="Rechercher">
+											<i class="abo-svg" aria-hidden="true">X</i>
+										</button>
+										<!-- FIN du composant <abo-bouton-icone-entete-app /> -->
+									</li>
+									<li class="abo-smart-entete-app__item-meta-navigation abo--hidden-version-mobile">
+										<!-- DÉBUT du composant <abo-bouton-icone-entete-app /> -->
+										<button
+											class="abo-bouton-icone-entete-app"
+											title="Notifications"
+										>
+											<i class="abo-svg" aria-hidden="true">X</i>
+										</button>
+										<!-- FIN du composant <abo-bouton-icone-entete-app /> -->
+									</li>
+									<li class="abo-smart-entete-app__item-meta-navigation abo--hidden-version-mobile">
+										<!-- DÉBUT du composant <abo-bouton-compte-entete-app
+											* État selected: 
+												- Ajouter la classe CSS ".abo--selected" sur le button.abo-bouton-compte-entete-app
+												- Modifier la valeur de l'attribut aria-expanded pour "true"
+										/> -->
+										<button
+											class="abo-bouton-compte-entete-app"
+											title="Mon compte"
+											aria-expanded="false"
+										>
+											<i class="abo-svg">X</i>
+											<span>Prénom</span>
+										</button>
+										<!-- FIN du composant <abo-bouton-compte-entete-app /> -->
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+				<!-- DÉBUT du composant <abo-menu-principal /> -->
+				<nav
+					class="abo-menu-principal abo-smart-entete-app__menu"
+					aria-label="Menu principal"
+					tabindex="-1"
+				>
+					<ul class="abo-menu-principal__liste">
+						<li>
+							<a class="abo-menu-principal__lien" href="#">
+								<i class="abo-svg abo-menu-principal__icone" aria-hidden="true">X</i>
+								<span class="abo-menu-principal__etiquette">Tableau de bord</span>
+							</a>
+						</li>
+						<li>
+							<a class="abo-menu-principal__lien" href="#" aria-current="page">
+								<i class="abo-svg abo-menu-principal__icone" aria-hidden="true">X</i>
+								<span class="abo-menu-principal__etiquette">Mes séjours</span>
+							</a>
+						</li>
+						<li>
+							<a class="abo-menu-principal__lien" href="#">
+								<i class="abo-svg abo-menu-principal__icone" aria-hidden="true">X</i>
+								<span class="abo-menu-principal__etiquette">Profil</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<!-- FIN du composant <abo-menu-principal /> -->
+				<!-- DÉBUT du composant <abo-barre-outils />
+					 * Retirer la classe .abo--hidden pour afficher la barre d'outils
+				-->
+				<nav
+					class="abo-barre-outils abo--hidden abo-smart-entete-app__barre-outils"
+					aria-label="Barre d'outils"
+					tabindex="-1"
+				>
+					<ul class="abo-barre-outils__liste">
+						<li>
+							<a class="abo-barre-outils__lien" href="#">
+								<i class="abo-svg abo-barre-outils__icone" aria-hidden="true">X</i>
+								<span class="abo-barre-outils__etiquette">Accueil</span>
+							</a>
+						</li>
+						<li>
+							<a class="abo-barre-outils__lien" href="#"  aria-current="page">
+								<i class="abo-svg abo-barre-outils__icone" aria-hidden="true">X</i>
+								<span class="abo-barre-outils__etiquette">Mes séjours</span>
+							</a>
+						</li>
+						<li>
+							<a class="abo-barre-outils__lien" href="#">
+								<i class="abo-svg abo-barre-outils__icone" aria-hidden="true">X</i>
+								<span class="abo-barre-outils__etiquette">Profil</span>
+							</a>
+						</li>
+						<li>
+							<a class="abo-barre-outils__lien" href="#">
+								<i class="abo-svg abo-barre-outils__icone" aria-hidden="true">X</i>
+								<span class="abo-barre-outils__etiquette">Notifications</span>
+							</a>
+						</li>
+						<li>
+							<a class="abo-barre-outils__lien" href="#">
+								<i class="abo-svg abo-barre-outils__icone" aria-hidden="true">X</i>
+								<span class="abo-barre-outils__etiquette">Menu</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<!-- FIN du composant <abo-barre-outils /> -->
+			</header>
+			<!-- FIN du composant <abo-smart-entete-app /> -->
+			<!-- DÉBUT <router-view /> du composant <abo-smart-app-root /> -->
+			<!-- DÉBUT du composant <abo-smart-page-sejour /> -->
+			<!-- DÉBUT du composant <abo-gabarit-page /> -->
+			<main
+				class="abo-gabarit-page abo-smart-page-sejour abo-smart-app-root__corps"
+				tabindex="-1"
+			>
+				<header class="abo-gabarit-page__entete">
+					<div class="abo-gabarit-page__contenu-entete">
+						<div class="abo-gabarit-page__contenu-gauche-entete">
+							<!-- DÉBUT slot "prepend-contenu-gauche-entete" du composant <abo-gabarit-page /> -->
+							<!-- FIN slot "prepend-contenu-gauche-entete" du composant <abo-gabarit-page /> -->
+							<div class="abo-gabarit-page__zone-titre">
+								<!-- DÉBUT du composant <abo-link /> -->
+								<a
+									class="abo-link abo--variant-text abo--align-item-center abo-gabarit-page__lien-retour"
+									href="#"
+								>
+									<span
+										v-if="$slots['prepend']"
+										class="abo-link__prepend"
+									>
+										<!-- DÉBUT slot "prepend" du composant <abo-link /> -->
+										<i class="abo-svg"><</i>
+										<!-- FIN slot "prepend" du composant <abo-link /> -->
+									</span>
+									<span class="abo-link__label">
+										Mes séjours
+									</span>
+									<span
+										v-if="$slots['append']"
+										class="abo-link__append"
+									>
+										<!-- DÉBUT slot "append" du composant <abo-link /> -->
+										<!-- FIN slot "append" du composant <abo-link /> -->
+									</span>
+								</a>
+								<!-- FIN du composant <abo-gabarit-page /> -->
+								<h1 class="abo-gabarit-page__titre">Créer un séjour</h1>
+							</div>
+							<!-- DÉBUT slot "append-contenu-gauche-entete" du composant <abo-gabarit-page /> -->
+							<!-- FIN slot "append-contenu-gauche-entete" du composant <abo-gabarit-page /> -->
+						</div>
+						<div 
+							v-if="$slots['contenu-droit-entete']"
+							class="abo-gabarit-page__contenu-droit-entete"
+						>
+							<!-- DÉBUT slot "contenu-droit-entete" du composant <abo-gabarit-page /> -->
+							<!-- FIN slot "contenu-droit-entete" du composant <abo-gabarit-page /> -->
+						</div>
+					</div>
+					<!-- DÉBUT slot "menu-secondaire" du composant <abo-gabarit-page /> -->
+					<!-- DÉBUT du composant <abo-menu-secondaire /> -->
+					<div
+						v-if="$slots['menu-secondaire']"
+						class="abo-menu-secondaire abo-gabarit-page__menu-secondaire"
+						aria-label="Menu secondaire - Créer un séjour"
+					>
+						<div class="abo-menu-secondaire__degrade" aria-hidden="true"></div>
+						<nav class="abo-menu-secondaire__nav">
+							<ul class="abo-menu-secondaire__liste">
+								<li>
+									<a 
+										class="abo-menu-secondaire__lien"
+										href="#"
+										aria-current="page"
+									>
+										Séjour
+									</a>
+								</li>
+							
+								<li>
+									<a
+										class="abo-menu-secondaire__lien"
+										href="#"
+										
+									>
+										Conseils
+									</a>
+								</li>
+								<li>
+									<a
+										class="abo-menu-secondaire__lien"
+										href="#"
+									>
+										Participants
+									</a>
+								</li>
+								<li>
+									<a
+										class="abo-menu-secondaire__lien"
+										href="#"
+									>
+									
+										Historique
+									</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<!-- DÉBUT du composant <abo-menu-secondaire /> -->
+					<!-- FIN slot "menu-secondaire" du composant <abo-gabarit-page /> -->
+				</header>
+				<!-- DÉBUT slot "menu-mobile" du composant <abo-gabarit-page /> -->
+				<!-- FIN slot "menu-mobile" du composant <abo-gabarit-page /> -->
+				<div class="abo-gabarit-page__corps abo--no-padding-mobile">
+					<!-- DÉBUT slot default du composant <abo-gabarit-page /> -->
+					<!-- DÉBUT <router-view /> du composant <abo-smart-page-sejour /> -->
+					<!-- DÉBUT du composant <abo-smart-etapes-sejour /> -->
+					<div class="abo-smart-etapes-sejour">
+						<div class="abo-smart-etapes-sejour__colonne">
+							<!-- DÉBUT du composant <abo-barre-etapes-sejour /> -->
+							<nav class="abo-barre-etapes-sejour" aria-label="Étapes du formulaire de séjour">
+								<ol class="abo-barre-etapes-sejour__liste">
+									<li class="abo-barre-etapes-sejour__etape abo--current-step">
+										<a 
+											class="abo-barre-etapes-sejour__lien"
+											href="#"
+											aria-current="step"
+										>
+											<span class="abo-barre-etapes-sejour__etiquette">
+												<span class="abo-barre-etapes-sejour__numero-etape">
+													Étape&nbsp;1&nbsp;
+												</span>
+												<span class="abo-barre-etapes-sejour__nom-etape">
+													Nature
+												</span>
+											</span>
+										</a>
+									</li>
+									<li class="abo-barre-etapes-sejour__etape abo--prochaine-etape-barre">
+										<a 
+											class="abo-barre-etapes-sejour__lien"
+											href="#"
+										>
+											<span class="abo-barre-etapes-sejour__etiquette">
+												<span class="abo-barre-etapes-sejour__numero-etape">
+													Étape&nbsp;2&nbsp;
+												</span>
+												<span class="abo-barre-etapes-sejour__nom-etape">
+													Itinéraire
+												</span>
+											</span>
+											<span class="abo-barre-etapes-sejour__contenu-droit">
+												<i class="abo-svg abo-barre-etapes-sejour__icone abo--etape-incomplete" title="Étape 2 incomplète">Y</i>
+											</span>
+										</a>
+									</li>
+									<li class="abo-barre-etapes-sejour__etape abo--etape-bloquee abo--prochaine-etape-barre">
+										<span
+											class="abo-barre-etapes-sejour__lien"
+										>
+											<span class="abo-barre-etapes-sejour__etiquette">
+												<span class="abo-barre-etapes-sejour__numero-etape">
+													Étape&nbsp;3&nbsp;
+												</span>
+												<span class="abo-barre-etapes-sejour__nom-etape">
+													Évaluation
+												</span>
+											</span>
+											<span class="abo-barre-etapes-sejour__contenu-droit">
+												<i class="abo-svg abo-barre-etapes-sejour__icone" title="Étape 3 bloquée">X</i>
+											</span>
+										</span>
+									</li>
+									<li class="abo-barre-etapes-sejour__etape abo--etape-bloquee abo--prochaine-etape-barre">
+										<span
+											class="abo-barre-etapes-sejour__lien"
+										>
+											<span class="abo-barre-etapes-sejour__etiquette">
+												<span class="abo-barre-etapes-sejour__numero-etape">
+													Étape&nbsp;4&nbsp;
+												</span>
+												<span class="abo-barre-etapes-sejour__nom-etape">
+													Atténuation
+												</span>
+											</span>
+											<span class="abo-barre-etapes-sejour__contenu-droit">
+												<i class="abo-svg abo-barre-etapes-sejour__icone" title="Étape 4 bloquée">X</i>
+											</span>
+										</span>
+									</li>
+									<li class="abo-barre-etapes-sejour__etape abo--etape-bloquee abo--prochaine-etape-barre">
+										<span
+											class="abo-barre-etapes-sejour__lien"
+										>
+											<span class="abo-barre-etapes-sejour__etiquette">
+												<span class="abo-barre-etapes-sejour__numero-etape">
+													Étape&nbsp;5&nbsp;
+												</span>
+												<span class="abo-barre-etapes-sejour__nom-etape">
+													Exigences
+												</span>
+											</span>
+											<span class="abo-barre-etapes-sejour__contenu-droit">
+												<i class="abo-svg abo-barre-etapes-sejour__icone" title="Étape 5 bloquée">X</i>
+											</span>
+										</span>
+									</li>
+									<li class="abo-barre-etapes-sejour__etape abo--etape-bloquee">
+										<span
+											class="abo-barre-etapes-sejour__lien"
+										>
+											<span class="abo-barre-etapes-sejour__etiquette">
+												<span class="abo-barre-etapes-sejour__numero-etape">
+													Étape&nbsp;6&nbsp;
+												</span>
+												<span class="abo-barre-etapes-sejour__nom-etape">
+													Engagements
+												</span>
+											</span>
+											<span class="abo-barre-etapes-sejour__contenu-droit">
+												<i class="abo-svg abo-barre-etapes-sejour__icone" title="Étape 6 bloquée">X</i>
+											</span>
+										</span>
+									</li>
+								</ol>
+							</nav>
+							<!-- FIN du composant <abo-barre-etapes-sejour /> -->
+							<button class="abo-button abo--variant-secondary abou-mt-md abou-full-width" disabled>Soumettre votre séjour</button>
+						</div>
+						<!-- DÉBUT <router-view /> du composant <abo-smart-etapes-sejour /> -->
+						<!-- DÉBUT du composant <abo-smart-sejour-etape-nature /> -->
+						<!-- DÉBUT du composant <abo-boite-etape-sejour /> -->
+						<div
+							class="abo-boite-etape-sejour abo-smart-sejour-etape-nature abo-smart-etapes-sejour__etape-courante"
+							tabindex="-1"
+						>
+							<header class="abo-boite-etape-sejour__entete">
+								<div class="abo-boite-etape-sejour__entete-accordeon"><!-- En version mobile, ajouter les attributs role="button", tabindex="0", aria-expended="true" et aria-controls="corps-accordeon-uuid" -->
+									<div class="abo-boite-etape-sejour__contenu-entete">
+										<h2 class="abo-tilte abou-h3 abo-boite-etape-sejour__titre">
+											<span class="abo-boite-etape-sejour__surtitre">
+												Étape 1
+											</span>
+											<span>Nature du séjour</span>
+										</h2>
+										<div 
+											v-if="$slots['contenu-droit-entete']"
+											class="abo-boite-etape-sejour__contenu-droit-entete"
+										>
+											<!-- DÉBUT slot "contenu-droit-entete" du composant <abo-boite-etape-sejour /> -->
+											slot: contenu-droit-entete
+											<!-- FIN slot "contenu-droit-entete" du composant <abo-boite-etape-sejour /> -->
+										</div>
+									</div>
+									<i class="abg-svg abo-boite-etape-sejour__icone-accordeon">X</i><!-- ajouter le svg de chevron en version mobile-->
+								</div>
+								<div 
+									v-if="$slots['contenu-accordeon-entete']"
+									id="corps-accordeon-uuid"
+									class="abo-boite-etape-sejour__corps-accordeon"
+								>
+									<div class="abo-boite-etape-sejour__contenu-accordeon">
+										<!-- DÉBUT slot "contenu-accordeon-entete" du composant <abo-boite-etape-sejour /> -->
+										slot: contenu-accordeon-entete
+										<!-- FIN slot "contenu-accordeon-entete" du composant <abo-boite-etape-sejour /> -->
+									</div>
+								</div>
+							</header>
+							<div 
+								v-if="$slots['prepend-corps']"
+								class="abo-boite-etape-sejour__prepend-corps"
+							>
+								<!-- DÉBUT slot "prepend-corps" du composant <abo-boite-etape-sejour /> -->
+								slot: prepend-corps
+								<!-- FIN slot "prepend-corps" du composant <abo-boite-etape-sejour /> -->
+							</div>
+							<div class="abo-boite-etape-sejour__corps">
+								<!-- DÉBUT slot default du composant <abo-boite-etape-sejour /> -->
+								<form
+									id="nom-form-uuid"
+									class="abo-smart-sejour-etape-nature__corps"
+									action="#"
+								>
+									<p>
+										<label for="selectTheme">Thème ABEO</label>
+										<select id="selectTheme">
+											<option value="default">Défaut</option>
+											<option value="ulaval">Université Laval</option>
+											<option value="udem">Université de Montréal</option>
+											<option value="udes">Université de Sherbrooke</option>
+											<option value="cegeplimoilou">Cégep Limoilou</option>
+										</select>
+									</p>
+									<p>
+										<input 
+											id="checkEnteteFixe"
+											type="checkbox"
+											name="checkEnteteFixe"
+										>
+										<label for="checkEnteteFixe">Entête en position fixed (breakpoint smAndUp)</label>
+									</p>
+									<p>
+										<input 
+											id="checkBarreOutils"
+											type="checkbox"
+											name="checkBarreOutils"
+										>
+										<label for="checkBarreOutils">Afficher la barre d'outils (breakpoint mobile)</label>
+									</p>
+									<p>
+										<input 
+											id="checkBoutonMonCompteSelected"
+											type="checkbox"
+											name="checkBoutonMonCompteSelected"
+										>
+										<label for="checkBoutonMonCompteSelected">Bouton «&nbsp;Mon compte&nbsp;» (abo-bouton-compte-entete-app) selected (breakpoint smAndUp)</label>
+									</p>
+									<p>
+										<input 
+											id="checkRetirerPaddingCorpsGabaritPage"
+											type="checkbox"
+											name="checkRetirerPaddingCorpsGabaritPage"
+											checked
+										>
+										<label for="checkRetirerPaddingCorpsGabaritPage">Retirer le padding du corps du abo-gabarit-page (breakpoint mobile)</label>
+									</p>
+									<p>
+										<input 
+											id="checkBoutonActionsSticky"
+											type="checkbox"
+											name="checkBoutonActionsSticky"
+											checked
+										>
+										<label for="checkBoutonActionsSticky">Boutons d'action du abo-boite-etape-sejour en position sticky (breakpoint smAndUp)</label>
+									</p>
+									<p>
+										<label for="selectAjoutContenu">Ajouter du contenu au formulaire</label>
+										<select id="selectAjoutContenu">
+											<option value="0">Aucun</option>
+											<option value="2">2 paragraphes</option>
+											<option value="5" selected>5 paragraphes</option>
+											<option value="10">10 paragraphes</option>
+										</select>
+									</p>
+									<div id="zoneContenu"></div>
+								</form>
+								<!-- FIN slot default du composant <abo-boite-etape-sejour /> -->
+							</div>
+							<div class="abo-boite-etape-sejour__pied abo--position-sticky"><!-- Retirer la position sticky 
+								en retirant la classe CSS "abo--position-sticky" 
+								lorsqu'un sous-formulaire de l'étape courante est en modification sur place -->
+								<div class="abo-boite-etape-sejour__actions-principales">
+									<button
+										class="abo-button abo--variant-tertiary"
+										disabled="true"
+										aria-label="Étape précédente"
+										title="Étape précédente"
+									>
+										<i class="abo-svg" aria-hidden="true"><</i>
+									</button>
+									<button
+										class="abo-button abo--variant-primary"
+										type="submit"
+										form="nom-form-uuid"
+										aria-label="Étape suivante"
+									>
+										Étape suivante
+										<i class="abo-svg" aria-hidden="true">></i>
+									</button>
+								</div>
+								<div class="abo-boite-etape-sejour__actions-secondaires">
+									<button
+										class="abo-button abo--variant-tertiary abo-boite-etape-sejour__bouton-enregistrer"
+										aria-label="Enregistrer l'étape 1"
+									>
+										Enregistrer
+									</button>
+								</div>
+							</div>
+						</div>
+						<!-- FIN du composant <abo-boite-etape-sejour /> -->
+						<!-- FIN du composant <abo-smart-sejour-etape-nature /> -->
+						<!-- FIN <router-view /> du composant <abo-smart-etapes-sejour /> -->
+					</div>
+					<!-- FIN du composant <abo-smart-etapes-sejour /> -->
+					<!-- FIN <router-view /> du composant <abo-smart-page-sejour /> -->
+					<!-- FIN slot default du composant <abo-gabarit-page /> -->
+				</div>
+			</main>
+			<!-- FIN du composant <abo-gabarit-page /> -->
+			<!-- FIN du composant <abo-smart-page-sejour /> -->
+			<!-- FIN <router-view /> du composant <abo-smart-app-root /> -->
+			<footer class="abo-smart-app-root__pied">
+				<div class="abo-smart-app-root__conteneur-pied">
+					<nav aria-label="Menu du pied de page">
+						<ul class="abo-smart-app-root__menu-pied">
+							<li>
+								<a class="abo-smart-app-root__lien-pied" href="#">
+									Aide
+								</a>
+							</li>
+							<li>
+								<a class="abo-smart-app-root__lien-pied" href="#">
+									Termes et conditions
+								</a>
+							</li>
+							<li>
+								<a class="abo-smart-app-root__lien-pied" href="#">
+									Accessibilité
+								</a>
+							</li>
+							<li>
+								<a class="abo-smart-app-root__lien-pied" href="#">
+									English
+								</a>
+							</li>
+						</ul>
+					</nav>
+				
+					<small class="abo-smart-app-root__copyright">©&nbsp;<span id="anneeCourante"></span> ABEO</small>
+				</div>
+			</footer>
+		</div>
+		<!-- FIN du composant <abo-smart-app-root /> -->
+
+		<script>
+			const breackpointIsSmAndUp = window.innerWidth >= 768;
+
+			
+			/**
+			 * Gestion la navigation des liens « Aller au contenu »
+			*/
+			document
+				.querySelector('[data-go-to="contenu"]')
+				.addEventListener('click', 
+					() => document.querySelector('main').focus()
+				);
+
+			document
+				.querySelector('[data-go-to="menu"]')
+				.addEventListener('click', 
+					() =>  document.querySelector(
+						breackpointIsSmAndUp ? '.abo-menu-principal' : '.abo-barre-outils'
+					)?.focus()
+				);
+		
+
+			/**
+			 * Formulaire de configuration de la page
+			*/
+
+			const refSelectTheme = document.getElementById('selectTheme');
+
+			refSelectTheme.addEventListener('change', () => {
+				document.body.setAttribute('data-abo-theme', refSelectTheme.value);
+			});
+			
+			// Entete fixe
+			const refCheckEnteteFixe = document.getElementById('checkEnteteFixe');
+
+			refCheckEnteteFixe.addEventListener('change', () => {
+				document.querySelector('.abo-smart-entete-app').classList.toggle('abo--position-fixed');
+			});
+			
+			// Barre d'outils
+			const refCheckBarreOutils = document.getElementById('checkBarreOutils');
+
+			const afficherLienGoToMenu = () => {
+				const refLienGoToMenu = document.querySelector('[data-go-to="menu"]');
+				if (!breackpointIsSmAndUp) {
+					if (refCheckBarreOutils.checked) {
+						refLienGoToMenu.removeAttribute('style');
+					} else {
+						refLienGoToMenu.style.display = 'none';
+					}
+				} else {
+					refLienGoToMenu.removeAttribute('style');
+				}
+			};
+
+			afficherLienGoToMenu();
+
+			refCheckBarreOutils.addEventListener('change', () => {
+				document.querySelector('.abo-barre-outils').classList.toggle('abo--hidden');
+				document.querySelector('.abo-smart-app-root').classList.toggle('abo--etape-bloquee-outils-hidden');
+				
+				afficherLienGoToMenu();
+			});
+			
+			// Bouton mon compte
+			const refCheckBoutonMonCompteSelected = document.getElementById('checkBoutonMonCompteSelected');
+			const refBoutonMonCompte = document.querySelector('.abo-bouton-compte-entete-app');
+			
+			const toogleBoutonMonCompte = (expended) => {
+				if (expended) {
+					refBoutonMonCompte.classList.add('abo--selected');
+				} else {
+					refBoutonMonCompte.classList.remove('abo--selected');
+				}
+
+				refBoutonMonCompte.setAttribute('aria-expanded', expended.toString());
+
+				if (refCheckBoutonMonCompteSelected.checked !== expended) {
+					refCheckBoutonMonCompteSelected.checked = expended;
+				}
+			};
+
+			refBoutonMonCompte.addEventListener('click', () => 
+				toogleBoutonMonCompte(!refCheckBoutonMonCompteSelected.checked)
+			);
+			refCheckBoutonMonCompteSelected.addEventListener('change', () => 
+				toogleBoutonMonCompte(refCheckBoutonMonCompteSelected.checked)
+			);
+
+			// Padding du corps du gabarit de page
+			const refCheckRetirerPaddingCorpsGabaritPage = document.getElementById('checkRetirerPaddingCorpsGabaritPage');
+
+			refCheckRetirerPaddingCorpsGabaritPage.addEventListener('change', () => {
+				const refCorps = document.querySelector('.abo-gabarit-page__corps');
+
+				if (refCheckRetirerPaddingCorpsGabaritPage.checked) {
+					refCorps.classList.add('abo--no-padding-mobile');
+				} else {
+					refCorps.classList.remove('abo--no-padding-mobile');
+				}
+			});
+
+			// Boutons d'action sticky
+			const refCheckBoutonActionsSticky = document.getElementById('checkBoutonActionsSticky');
+
+			refCheckBoutonActionsSticky.addEventListener('change', () => {
+				const refPied = document.querySelector('.abo-boite-etape-sejour__pied');
+				if (refCheckBoutonActionsSticky.checked) {
+					refPied.classList.add('abo--position-sticky');
+				} else {
+					refPied.classList.remove('abo--position-sticky');
+				}
+			});
+
+			// Contrôle ajout de contenu dans le corps de l'étape
+			const refAjoutContenu = document.getElementById('selectAjoutContenu');
+
+			const ajouterParagrapheDansZoneContenu = () => {
+				const refZoneContenu = document.getElementById(
+					'zoneContenu'
+				);
+
+				const TEXTE_LOREM = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.Tenetur at doloribus eaque iste est sint aperiam minus cumdel eniti voluptates. Dolorem reiciendis maiores molestiae incidunt pariatur ipsam ipsum cum nobis?';
+			
+				let innerHtml = '';
+				for (let index = 0; index < parseInt(refAjoutContenu.value); index++) {
+					innerHtml += `<p>${TEXTE_LOREM}</p>`
+				}
+				refZoneContenu.innerHTML = innerHtml;
+			}
+			
+			ajouterParagrapheDansZoneContenu();
+
+			refAjoutContenu.addEventListener('change', ajouterParagrapheDansZoneContenu);
+
+
+			/**
+			 *  Ouverture de l'accordéon de la boîte d'étape barre étapes
+			 *  Note: l'accessibilité n'est pas implémenté
+			*/
+			const refBoiteEtapeSejour = document.querySelector('.abo-boite-etape-sejour');
+			const refEnteteAccordeonBoiteEtapeSejour = refBoiteEtapeSejour.querySelector('.abo-boite-etape-sejour__entete');
+			const refBoutonAccordeonBoiteEtapeSejour = refEnteteAccordeonBoiteEtapeSejour.querySelector('.abo-boite-etape-sejour__entete-accordeon');
+			const refContenuAccordeonBoiteEtapeSejour = refBoiteEtapeSejour.querySelector('.abo-boite-etape-sejour__contenu-accordeon');
+
+			refBoutonAccordeonBoiteEtapeSejour.addEventListener('click', () => {
+				refEnteteAccordeonBoiteEtapeSejour.classList.toggle('abo--accordeon-ouvert');
+			});
+			
+
+			/**
+			 *  Clone de la barre étapes séjour en version mobile
+			*/
+
+			const refBarreEtapesSejour = document.querySelector('.abo-barre-etapes-sejour');
+			refContenuAccordeonBoiteEtapeSejour.innerHTML = refBarreEtapesSejour.innerHTML;
+
+
+			/**
+			 *  Valiation du formulaire
+			*/
+			const refFormNatureSejour = document.getElementById('nom-form-uuid');
+			const refSmartSejourEtapeNature = document.querySelector('.abo-smart-sejour-etape-nature');
+			
+			refFormNatureSejour.addEventListener('submit', (e) => {
+				e.preventDefault();
+				
+				// Si le formulaire est valide: naviguer à la prochaine étape
+				window.scrollTo(0, refSmartSejourEtapeNature?.offsetTop ?? 0);
+				refSmartSejourEtapeNature?.focus();
+			});
+
+
+			/**
+			 *  Gestion du défilement horizontal du AboMenuSecondaire
+			*/
+
+			const gererDefilementHorizontalMenuSecondaire = () => {
+				const getStyle = (element, styleProp) => {
+					if (element.currentStyle) {
+						return element.currentStyle[styleProp];
+					}
+					
+					if (window.getComputedStyle) {
+						return window.getComputedStyle(element, null).getPropertyValue(styleProp);
+					}
+				}
+
+				const isElementPleinementVisible = (element, container = document.body, threshold = 0) => {
+					const containerRect = container.getBoundingClientRect();
+					const elementRect = element.getBoundingClientRect();
+					
+					const elementTop = elementRect.top + parseInt(getStyle(element, 'margin-top'));
+					const elementBottom = elementRect.bottom + parseInt(getStyle(element, 'margin-bottom'));
+					const elementLeft = elementRect.left + parseInt(getStyle(element, 'margin-left'));
+					const elementRight = elementRect.right + parseInt(getStyle(element, 'margin-right')) + threshold;
+					
+					return (
+						elementTop >= containerRect.top &&
+						elementBottom <= containerRect.bottom &&
+						elementLeft >= containerRect.left &&
+						elementRight <= containerRect.right
+					);
+				}
+
+				const refNav = document.querySelector('.abo-menu-secondaire__nav');
+				const refListe = document.querySelector('.abo-menu-secondaire__liste');
+				const refCurrentItem = document.querySelector('.abo-menu-secondaire__lien[aria-current="page"]').parentElement;
+				
+				if (!isElementPleinementVisible(refCurrentItem, refListe, 32)) {
+					refNav.scrollLeft = refNav.scrollWidth > refCurrentItem.offsetLeft ? refNav.scrollWidth - parseInt(getStyle(refCurrentItem, 'width')) : refCurrentItem.offsetLeft;
+				}
+							
+				let mouseDown = false;
+				let startX = 0; 
+				let scrollLeft = 0;
+	
+				const startDragging = (event) => {
+					mouseDown = true;
+					startX = event.pageX - refNav.offsetLeft;
+					scrollLeft = refNav.scrollLeft;
+				};
+
+				const stopDragging = (e) => {
+					e.preventDefault();
+					mouseDown = false;
+				};
+	
+				refNav.addEventListener('mousemove', (event) => {
+					event.preventDefault();
+
+					if(!mouseDown) return; 
+
+					const x = event.pageX - refNav.offsetLeft;
+					const scroll = x - startX;
+					refNav.scrollLeft = scrollLeft - scroll;
+				});
+	
+				refNav.addEventListener('mousedown', startDragging, false);
+				refNav.addEventListener('mouseup', stopDragging, false);
+				refNav.addEventListener('mouseleave', stopDragging, false);
+			}
+
+			gererDefilementHorizontalMenuSecondaire();
+
+
+			/**
+			 *  Ajouter l'année courante dans le pied de page
+			*/
+			document.getElementById('anneeCourante').innerText = new Date().getFullYear().toString();
+	
+
+			/**
+			 *  Exemple d'imbrication de routes dans le router Vue
+			*/
+			const AboNomRouteAbeoApp = Object.freeze({
+				ActivationCompte: 'activation-compte',
+				TableauBord: 'tableau-bord',
+				Sejours: 'sejours',
+				Compte: 'compte',
+			});
+
+			const AboNomRouteSejour = Object.freeze({
+				CreerSejour: 'creer-sejour',
+				CreerSejourEtapeNature: 'creer-sejour-etape-nature',
+				CreerSejourEtapeItineraire: 'creer-sejour-etape-itineraire',
+				CreerSejourEtapeEvaluation: 'creer-sejour-etape-evaluation',
+				CreerSejourConseils: 'creer-sejour-conseils',
+				Sejour: 'sejour',
+				SejourEtapeNature: 'sejour-etape-nature',
+				SejourEtapeItineraire: 'sejour-etape-itineraire',
+				SejourEtapeEvaluation: 'sejour-etape-evaluation',
+				SejourConseils: 'sejour-conseils',
+			});
+
+			const AboNomRouteCompte = Object.freeze({
+				Profil: 'compte-profil',
+				FenetreRenseignementsPersonnels: 'compte-profil-fenetre-renseignements-personnels',
+				FenetreContactsUrgence: 'compte-profil-fenetre-contacts-urgence',
+				FenetreAssurancesVoyage: 'compte-profil-fenetre-assurances-voyage',
+				FenetrePasseports: 'compte-profil-fenetre-passeports',
+			});
+
+			const routesSejours = [
+				{
+					path: 'sejours',
+					name: AboNomRouteAbeoApp.Sejours,
+					component: 'AboSmartPageListeSejours',
+				},
+				{
+					path: 'sejours/creer',
+					name: AboNomRouteSejour.CreerSejour,
+					component: 'AboSmartPageSejour',
+					redirect: () => ({ name: AboNomRouteSejour.CreerSejourEtapeNature }),
+					children: [
+						{
+							path: '',
+							component: 'AboSmartEtapesSejour',
+							children: [
+								{
+									path: '',
+									name: AboNomRouteSejour.CreerSejourEtapeNature,
+									component: 'AboSmartSejourEtapeNature',
+								},
+								{
+									path: 'itineraire',
+									name: AboNomRouteSejour.CreerSejourEtapeItineraire,
+									component: 'AboSmartSejourEtapeItineraire',
+								},
+								{
+									path: 'evaluation',
+									name: AboNomRouteSejour.CreerSejourEtapeEvaluation,
+									component: 'AboSmartSejourEtapeEvaluation',
+								},
+							]
+						},
+						{
+							path: 'conseils',
+							name: AboNomRouteSejour.CreerSejourConseils,
+							component: 'AboSmartPageConseilsSejours',
+						}		
+					]
+				},
+				{
+					path: 'sejours/:idSejour',
+					name: AboNomRouteSejour.CreerSejour,
+					component: 'AboSmartPageSejour',
+					redirect: () => ({ name: AboNomRouteSejour.SejourEtapeNature }),
+					children: [
+						{
+							path: '',
+							component: 'AboSmartEtapesSejour',
+							children: [
+								{
+									path: '',
+									name: AboNomRouteSejour.SejourEtapeNature,
+									component: 'AboSmartSejourEtapeNature',
+								},
+								{
+									path: 'itineraire',
+									name: AboNomRouteSejour.SejourEtapeItineraire,
+									component: 'AboSmartSejourEtapeItineraire',
+								},
+								{
+									path: 'evaluation',
+									name: AboNomRouteSejour.SejourEtapeEvaluation,
+									component: 'AboSmartSejourEtapeEvaluation',
+								},
+							]
+						},
+						{
+							path: 'conseils',
+							name: AboNomRouteSejour.SejourConseils,
+							component: 'AboSmartPageConseilsSejours',
+						}		
+					]
+				},
+			];
+
+			const routesCompte = [
+				{
+					path: 'compte',
+					name: AboNomRouteAbeoApp.Compte,
+					component: 'AboSmartPageCompte',
+					children: [
+						{
+							path: 'profil',
+							name: AboNomRouteCompte.Profil,
+							component: 'AboSmartPageProfil',
+							children: [
+								{
+									path: 'renseignements-personnels',
+									name: AboNomRouteCompte.FenetreRenseignementsPersonnels,
+									component: 'AboSmartFenetreRenseignementsPersonnels',
+								},
+								{
+									path: 'contacts-urgence',
+									name: AboNomRouteCompte.FenetreContactsUrgence,
+									component: 'AboSmartFenetreContactsUrgence',
+								},
+								{
+									path: 'assurances-voyage',
+									name: AboNomRouteCompte.FenetreAssurancesVoyage,
+									component: 'AboSmartFenetreAssurancesVoyage',
+								},
+								{
+									path: 'passeports',
+									name: AboNomRouteCompte.FenetrePasseports,
+									component: 'AboSmartFenetrePasseports',
+								},
+							]
+						},
+					]
+				},
+				{
+					path: 'compte/activation',
+					name: AboNomRouteAbeoApp.ActivationCompte,
+					component: 'AboSmartPageActivationCompte',
+				},
+			];
+
+			const routerAbeoApp = {
+				path: '',
+				component: 'AboSmartAppRoot',
+				children: [
+					{
+						path: '',
+						name: AboNomRouteAbeoApp.TableauBord,
+						component: 'AboSmartPageTableauBord',
+					},
+					...routesSejours,
+					...routesCompte,
+				]
+			};
+		</script>
+	</body>
+</html>
